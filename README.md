@@ -1,1 +1,4 @@
 # BudgetApplicationFinalProject
+This is the github repository for our final project in Advanced C#
+Team Memebers: Jared B., Paul C., Josiah L.
+Project Plan: The basic idea we are running with for now is a budget app that will allow a user to log in to their account which will then store all their information within a database to be able to track their data that they have entered while using the application. Creating an account will also be able to allow users to view their spending and budgeting habits. This application will also allow users to make goals for themselves and see if they are getting closer to reaching the financial goals, they set for themselves. This application will also allow users to set up recurring bill withdrawals, monthly hobby spendings, monthly haircuts, monthly subscriptions, etc.
