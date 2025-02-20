@@ -7,6 +7,19 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BudgetWepApp.styles.css" asp-append-version="true" />
+
+    <!-- Makes the nav bar activate on hover-->
+    <style>
+        .navbar-nav .dropdown:hover .dropdown-menu {
+            display: block;
+            margin: 0;
+        }
+
+        .dropdown-menu {
+            transition: all 0.3s ease-in-out;
+        }
+
+    </style>
 </head>
 <body>
     <header>
@@ -22,14 +35,23 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        
+                        <!-- This is a drop down nav bar -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Services </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item" href="/home/withdrawalspage">Withdrawals</a></li>
+                                <li><a class="dropdown-item" href="/home/bankaccountinfo">Bank Account Info</a></li>
+                                <li><a class="dropdown-item" href="/home/privacy">Privacy</a></li>
+                            </ul>
                         </li>
+
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
