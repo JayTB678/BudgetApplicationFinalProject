@@ -1,6 +1,26 @@
 ﻿@{
     ViewData["Title"] = "Bank Account Info";
 }
-<div class="text-center">
-    <h1>This is the bank account info page.</h1>
+<div class="container px-4">
+    <h2 class="text-center">Bank account info</h2>
+    <div class="container overflow-hidden">
+        <div class="row gx-5">
+            <div class="col-3">
+                <div class="p-1 col-6 border bg-light mb-2">Weekly Income</div>
+                <input class="p-3 border bg-light mb-4 text-center" value="000.00" />
+
+                <div class="p-1 col-6 border bg-light mb-2">Ammount Saved</div>
+                <input class="p-3 border bg-light mb-4 text-center" value="000.00" />
+
+                <div class="p-1 col-6 border bg-light mb-2">Add Money</div>
+                <input class="p-3 border bg-light mb-4 text-center" value="000.00" />
+                
+                <div class="d-flex gap-2">
+                    <button type="submit" style="margin-top: -15px;" class="btn border bg-light mb-2">Add</button>
+                    <button type="submit" style="margin-top: -15px;" class="btn border bg-light mb-2">Cancel</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>
