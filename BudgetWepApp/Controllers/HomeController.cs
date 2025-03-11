@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Security.Principal;
 using BudgetWepApp.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,6 +19,16 @@ namespace BudgetWepApp.Controllers
             return View();
         }
 
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
+        public IActionResult Goals()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
@@ -27,6 +38,16 @@ namespace BudgetWepApp.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult BankAccountInfo()
+        {
+            return View();
+        }
+
+        public IActionResult WithdrawalsPage()
+        {
+            return View();
         }
     }
 }
