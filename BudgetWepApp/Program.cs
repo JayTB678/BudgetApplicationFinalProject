@@ -1,3 +1,6 @@
+using BudgetWepApp.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace BudgetWepApp
 {
     public class Program
@@ -8,6 +11,9 @@ namespace BudgetWepApp
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<UserContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("BudgetDb")));
 
             var app = builder.Build();
 
