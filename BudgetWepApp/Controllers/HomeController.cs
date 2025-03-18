@@ -7,11 +7,11 @@ namespace BudgetWepApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private UserContext context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(UserContext ctx)
         {
-            _logger = logger;
+            context = ctx;
         }
 
         public IActionResult Index()
@@ -40,9 +40,36 @@ namespace BudgetWepApp.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult BankAccountInfo()
+        [HttpGet]
+        public IActionResult BankAccountInfo(UserViewModel model)
         {
-            return View();
+            //this will be got from session later
+            int userID = 1;
+
+            //Populates the model
+            model.User = context.Users.FirstOrDefault(u => u.UserID == userID);
+            model.Goals = context.Goals.Where(g => g.User.UserID == userID).ToList();
+            model.Income = context.Incomes.Where(i => i.User.UserID == userID).ToList();
+            model.RecurringPayments = context.recurringPayments.Where(r => r.User.UserID == userID).ToList();
+            model.Transactions = context.Transactions.Where(t => t.User.UserID == userID).ToList();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult AddIncome(Income income)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = new User();
+                user.UserID = 1;
+
+                
+
+                return RedirectToAction("BankAccountInfo");
+            }
+
+            return View("BankAccountInfo");
         }
 
         public IActionResult WithdrawalsPage()

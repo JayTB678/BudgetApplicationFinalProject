@@ -1,41 +1,46 @@
-﻿@{
+﻿@model UserViewModel
+@{
     ViewData["Title"] = "Bank Account Info";
 }
 <div class="container px-4">
     <h2 class="text-center">Bank account info</h2>
     <div class="container overflow-hidden">
         <div class="row gx-5 justify-content-center">
-            <div class="col-3">
-                <div class="p-1 col-6 border bg-light mb-2">Weekly Income</div>
-                <input class="p-3 border bg-light mb-4 text-center" value="000.00" />
+            <div class="col-5 border bg-gradiant py-4 m-2">
+                <form asp-action="AddIncome" method="post">
+                    <div class="p-1 col-6 border bg-light mb-2">Add Money</div>
+                    <input class="p-3 border bg-light mb-4 text-center" step="0.01" name="IncomeAmmount" value="000.00" />
 
-                <div class="p-1 col-6 border bg-light mb-2">Ammount Saved</div>
-                <input class="p-3 border bg-light mb-4 text-center" value="000.00" />
+                    <div class="d-flex gap-2">
+                        <button type="submit" style="margin-top: -15px;" class="btn border bg-light mb-2">Add</button>
+                        <button type="reset" style="margin-top: -15px;" class="btn border bg-light mb-2">Cancel</button>
+                    </div>
 
-                <div class="p-1 col-6 border bg-light mb-2">Add Money</div>
-                <input class="p-3 border bg-light mb-4 text-center" value="000.00" />
-
-                <div class="d-flex gap-2">
-                    <button type="submit" style="margin-top: -15px;" class="btn border bg-light mb-2">Add</button>
-                    <button type="submit" style="margin-top: -15px;" class="btn border bg-light mb-2">Cancel</button>
-                </div>
-
+                </form>
             </div>
 
-            <!-- New section to appear to the right -->
-            <div class="col-3">
-                <div class="p-1 col-12 border bg-light mb-2">Recent Transactions</div>
+            <!-- Right section -->
+            <div class="col-3 border bg-gradiant py-4 m-2">
+
+                <div class="p-1 col-6 border bg-light mb-2">Current Balance</div>
+                <div class="p-3 border bg-light mb-6 text-center">@Model.User.CurrentBalance.ToString("C")</div>
+
+                <div class="p-1 mb-2 mt-4 col-12 border bg-light">Recent Transactions</div>
 
                 <div class="col-12">
                     <div class="scroll-box" style="max-height: 300px; overflow-y: scroll;">
-                        <div class="p-1 col-11 border bg-light mb-2">Transaction #7</div>
-                        <div class="p-3 col-11 border mb-4 text-center text-success">+ $800</div>
-
-                        <div class="p-1 col-11 border bg-light mb-2">Transaction #6</div>
-                        <div class="p-3 col-11 border mb-4 text-center text-danger">- $200</div>
-
-                        <div class="p-1 col-11 border bg-light mb-2">Transaction #5</div>
-                        <div class="p-3 col-11 border mb-4 text-center text-success">+ $300</div>
+                        @foreach(Transaction transaction in @Model.Transactions)
+                        {
+                            <div class="p-1 col-11 border bg-light mb-2">@transaction.TimeStamp</div>
+                            if (@transaction.Ammount > 0)
+                            {
+                                <div class="p-3 col-11 border mb-4 text-center text-success">+ @transaction.Ammount.ToString("C")</div>
+                            }
+                            else
+                            {
+                                <div class="p-3 col-11 border mb-4 text-center text-danger">- @transaction.Ammount.ToString("C")</div>
+                            }
+                        }
                     </div>
                 </div>
             </div>

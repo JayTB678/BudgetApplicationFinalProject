@@ -86,6 +86,13 @@ namespace BudgetWepApp.Models
                 new
                 {
                     TransactionID = 2,
+                    UserID = 1,
+                    TimeStamp = new DateTime(2020, 3, 3),
+                    Ammount = -50.00
+                },
+                new
+                {
+                    TransactionID = 3,
                     UserID = 2,
                     TimeStamp = new DateTime(2020, 3, 3),
                     Ammount = 200.00
