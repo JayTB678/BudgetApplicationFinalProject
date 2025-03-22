@@ -1,6 +1,23 @@
-﻿@{
+﻿@model List<BudgetWepApp.Models.Goal>
+@{
     ViewData["Title"] = "Goals";
 }
 <h1>@ViewData["Title"]</h1>
 <h2>List of My Goals</h2>
-<button type="button" value="newGoal" class="btn btn-primary">Add New Goal</button>
+@if (Model == null || !Model.Any())
+{
+    <p>No goals found.</p>
+} else{
+    <div class="goalCard">
+        @foreach (var goal in Model)
+        {
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@goal.Name</h5>
+                    <p class="card-text">@goal.Description</p>
+                </div>
+            </div>
+        }
+    </div>
+}
+<a asp-controller="Home" asp-action="CreateGoal" class="btn btn-primary">Add New Goal</a>
