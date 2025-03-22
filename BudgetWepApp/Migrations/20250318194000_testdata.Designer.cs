@@ -4,6 +4,7 @@ using BudgetWepApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BudgetWepApp.Migrations
 {
     [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20250318194000_testdata")]
+    partial class testdata
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,9 +80,6 @@ namespace BudgetWepApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IncomeID"));
 
-                    b.Property<int>("DaysTillNextPayment")
-                        .HasColumnType("int");
-
                     b.Property<double>("IncomeAmmount")
                         .HasColumnType("float");
 
@@ -99,7 +99,6 @@ namespace BudgetWepApp.Migrations
                         new
                         {
                             IncomeID = 1,
-                            DaysTillNextPayment = 5,
                             IncomeAmmount = 100.0,
                             PayPeriodDays = 14,
                             UserID = 1
@@ -107,7 +106,6 @@ namespace BudgetWepApp.Migrations
                         new
                         {
                             IncomeID = 2,
-                            DaysTillNextPayment = 5,
                             IncomeAmmount = 200.0,
                             PayPeriodDays = 7,
                             UserID = 2
@@ -121,9 +119,6 @@ namespace BudgetWepApp.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RecurringPaymentId"));
-
-                    b.Property<int>("DaysTillNextPayment")
-                        .HasColumnType("int");
 
                     b.Property<int>("PaymenFrequencyDays")
                         .HasColumnType("int");
@@ -144,7 +139,6 @@ namespace BudgetWepApp.Migrations
                         new
                         {
                             RecurringPaymentId = 1,
-                            DaysTillNextPayment = 5,
                             PaymenFrequencyDays = 14,
                             PaymentAmount = 100.0,
                             UserID = 1
@@ -152,7 +146,6 @@ namespace BudgetWepApp.Migrations
                         new
                         {
                             RecurringPaymentId = 2,
-                            DaysTillNextPayment = 5,
                             PaymenFrequencyDays = 7,
                             PaymentAmount = 200.0,
                             UserID = 2
