@@ -48,6 +48,12 @@ namespace BudgetWepApp.Controllers
 
             //Populates the model
             model.User = context.Users.FirstOrDefault(u => u.UserID == userID);
+
+            if (model.User == null)
+            {
+                return NotFound("User not found");
+            }
+
             model.Goals = context.Goals.Where(g => g.User.UserID == userID).ToList();
             model.Income = context.Incomes.Where(i => i.User.UserID == userID).ToList();
             model.RecurringPayments = context.recurringPayments.Where(r => r.User.UserID == userID).ToList();
