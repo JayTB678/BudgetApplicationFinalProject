@@ -45,14 +45,16 @@ namespace BudgetWepApp.Models
                     IncomeID = 1,
                     UserID = 1,
                     IncomeAmmount = 100.00,
-                    PayPeriodDays = 14
+                    PayPeriodDays = 14,
+                    DaysTillNextPayment = 5
                 },
                 new
                 {
                     IncomeID = 2,
                     UserID = 2,
                     IncomeAmmount = 200.00,
-                    PayPeriodDays = 7
+                    PayPeriodDays = 7,
+                    DaysTillNextPayment = 5
                 }
             );
 
@@ -63,14 +65,16 @@ namespace BudgetWepApp.Models
                     RecurringPaymentId = 1,
                     UserID = 1,
                     PaymentAmount = 100.00,
-                    PaymenFrequencyDays = 14
+                    PaymenFrequencyDays = 14,
+                    DaysTillNextPayment = 5
                 },
                 new
                 {
                     RecurringPaymentId = 2,
                     UserID = 2,
                     PaymentAmount = 200.00,
-                    PaymenFrequencyDays = 7
+                    PaymenFrequencyDays = 7,
+                    DaysTillNextPayment = 5
                 }
             );
 

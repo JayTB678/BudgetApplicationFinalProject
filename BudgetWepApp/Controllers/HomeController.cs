@@ -79,7 +79,8 @@ namespace BudgetWepApp.Controllers
                     {
                         User = user,
                         IncomeAmmount = model.Amount,
-                        PayPeriodDays = model.FrequencyInDays ?? 0
+                        PayPeriodDays = model.FrequencyInDays ?? 0,
+                        DaysTillNextPayment = model.FrequencyInDays ?? 0
                     };
 
                     context.Incomes.Add(newIncome);
