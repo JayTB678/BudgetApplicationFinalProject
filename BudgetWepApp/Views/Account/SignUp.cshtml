@@ -1,12 +1,14 @@
-﻿@{
-    Layout = "_Sign-LogIn-Layout";
-}
+﻿
 <div style="margin-top: 50px; margin-left: 250px;margin-right: 250px; border: 2px solid black">
     <h2 class="text-center">Budget App PlaceHolder Title</h2>
     <form asp-action="Add" method="post" style="margin: 50px;">
         <div asp-validation-summary="All" class="text-danger"></div>
         <div class="mb-3">
-            <label class="form-label" style="display: inline-block;width: 30% ">Username</label>
+            <label class="form-label" style="display: inline-block;width: 30%">Name</label>
+            <input class="form-control" style="width: 30%" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label" style="display: inline-block;width: 30%">Phone number</label>
             <input class="form-control" style="width: 30%" />
         </div>
         <div class="mb-3">
@@ -17,8 +19,11 @@
             <label class="form-label" style="display: inline-block;width: 30%">Password</label>
             <input class="form-control" style="width: 30%" />
         </div>
+        <div class="mb-3">
+            <label class="form-label" style="display: inline-block;width: 30%">Confirm Password</label>
+            <input class="form-control" style="width: 30%" />
+        </div>
         <input type="hidden" />
-        <button type="submit" class="btn btn-primary">Log In</button>
-        <a href="SignUp">Sign Up</a>
+        <button type="submit" class="btn btn-primary">Save</button>
     </form>
 </div>
