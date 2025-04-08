@@ -1,20 +1,25 @@
-﻿@model List<BudgetWepApp.Models.Goal>
+@model UserViewModel
 @{
     ViewData["Title"] = "Home Page";
+    var golTot = 0;
+    double totalExpenses = 0;
+    double totalIncome = 0;
 }
 
-</div>
 <div class="container px-4">
     <h2 class="text-center">Welcome</h2>
     <div class="container overflow-hidden">
     <div class="row gx-5">
             <div class="col">
                 <div class="p-3 border bg-light text-center">Current Balance</div>
-                <div class="p-3 border bg-light">CurrentBalance Placeholder</div>
+                <div class="p-3 border bg-light">@Model.User.CurrentBalance</div>
             </div>
-            <div class="col">
-                <div class="p-3 border bg-light text-center">Transactions</div>
-                <div class="p-3 border bg-light">Last Transaction</div>
+            @foreach (Transaction transaction in Model.Transactions)
+            {
+                if(transaction == Model.Transactions.Last()){
+                <div class="col">
+                    <div class="p-3 border bg-light text-center">Transactions</div>
+                <div class="p-3 border bg-light">Last Transaction @transaction.Ammount</div>
                 <div class="p-3 border bg-light">
                     <a class="btn btn-primary" asp-controller="Home"
                        asp-action="WithdrawalsPage">
@@ -22,9 +27,16 @@
                     </a>
                 </div>
             </div>
+                }
+            }
+            @foreach (Goal gol in Model.Goals)
+            {
+                 golTot = golTot + 1;
+            }
             <div class="col">
                 <div class="p-3 border bg-light text-center">My Goals</div>
                 <div class="p-3 border bg-light">
+
                     <div class="goalCard">
                         @foreach (var goal in Model)
                         {
@@ -36,6 +48,9 @@
                         }
                     </div>
                     <a class="btn btn-primary" asp-controller="Home"
+
+                    @golTot <a class="btn btn-primary" asp-controller="Home"
+
                               asp-action="Goals">
                         Add Goals
                     </a>
@@ -47,18 +62,34 @@
         <div class="row gx-5">
             <div class="col">
                 <div class="p-3 border bg-light text-center">Future bar graph</div>
-                <div class="p-3 border bg-light">Place Holder</div>
+                <div>
+                    <canvas id="myChart"></canvas>
+                </div>
             </div>
+        @foreach (Goal goal in Model.Goals)
+            {
+            if (goal == Model.Goals.Last())
+                {
             <div class="col">
                 <div class="p-3 border bg-light text-center">Current Goal</div>
                 <div class="p-3 border bg-light">Goal PlaceHolder</div>
             </div>
+                }
+            }
         </div>
     </div>
     <div class="container overflow-hidden" style="margin-top: 50px;">
         <div class="row gx-5">
             <div class="col">
-                <div class="p-3 border bg-light">Custom</div>
+                @foreach (RecurringPayment recur in Model.RecurringPayments)
+                {
+                    if (recur == Model.RecurringPayments.Last())
+                    {
+                <div class="p-3 border bg-light">Current Recurring Payments</div>
+                        <div class="p-3 border bg-light">Amount: @recur.PaymentAmount</div>
+                        <div class="p-3 bg-light">Frequency: @recur.PaymenFrequencyDays | Till next Payment @recur.DaysTillNextPayment</div>
+                }
+                }
             </div>
             <div class="col">
                 <div class="p-3 border bg-light">Custom</div>
@@ -76,3 +107,32 @@
     </div>
 
 </div>
+<script>
+    const ctx = document.getElementById('myChart');
+    @foreach (Transaction transaction in Model.Transactions)
+    {
+        totalExpenses = totalExpenses + transaction.Ammount;
+    }
+    @foreach (Income income in Model.Income)
+    {
+        totalIncome = totalIncome + income.IncomeAmmount;
+    }
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Expenses', 'Income'],
+            datasets: [{
+                label: 'Income/Expenses',
+                data: [@totalExpenses, @totalIncome],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
