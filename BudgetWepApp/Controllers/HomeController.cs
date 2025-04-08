@@ -17,7 +17,9 @@ namespace BudgetWepApp.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            int userId = 1;
+            var goals = context.Goals.Where(g => g.UserID == userId).ToList();
+            return View(goals);
         }
 
         public IActionResult Contact()
@@ -86,7 +88,7 @@ namespace BudgetWepApp.Controllers
                 {
                     goalToUpdate.Name = goal.Name;
                     goalToUpdate.Description = goal.Description;
-                    goalToUpdate.DateAddded = goal.DateAddded;
+                    goalToUpdate.DateAddded = DateTime.Now;
                     context.SaveChanges();
                     return RedirectToAction("Goals", new { userId = goalToUpdate.UserID });
                 }
@@ -96,6 +98,29 @@ namespace BudgetWepApp.Controllers
                 }
             }
             return View(goal);
+        }
+        [HttpGet]
+        public IActionResult DeleteGoal(int goalId)
+        {
+           var goal = context.Goals.FirstOrDefault(g => g.GoalID == goalId);
+            if (goal == null)
+            {
+                return NotFound("Goal not found");
+            }
+            return View(goal);
+        }
+        [HttpPost]
+        public IActionResult ConfirmDelete(int goalId)
+        {
+            var goal = context.Goals.FirstOrDefault(g => g.GoalID == goalId);
+
+            if (goal != null)
+            {
+                context.Goals.Remove(goal);
+                context.SaveChanges();
+            }
+
+            return RedirectToAction("Goals");
         }
         public IActionResult Privacy()
         {

@@ -8,20 +8,19 @@
 {
     <p>No goals found.</p>
 } else {
-    <div class="goalCard">
-        @foreach (var goal in Model)
-        {
-            
-            <div class="card mb-3">
-                <div class="card-body">
-                    <a asp-controller="Home" asp-action="GoalDetails" asp-route-goalId="@goal.GoalID">
-                        <h5 class="card-title">@goal.Name</h5>
-                    </a>
-                    <p class="card-text">@goal.Description</p>
+        <div class="goalCard">
+            @foreach (var goal in Model)
+            {
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <a asp-controller="Home" asp-action="GoalDetails" asp-route-goalId="@goal.GoalID">
+                            <h5 class="card-title">@goal.Name</h5>
+                        </a>
+                        <p class="card-text">@goal.Description</p>
+                    </div>
                 </div>
-            </div>
-            
-        }
-    </div>
+            }
+        </div>
+        
 }
-<a asp-controller="Home" asp-action="CreateGoal" class="btn btn-primary">Add New Goal</a>
+<a asp-controller="Home" asp-action="CreateGoal" class="btn btn-primary mt-3">Add New Goal</a>

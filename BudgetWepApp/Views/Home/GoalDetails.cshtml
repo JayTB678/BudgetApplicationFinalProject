@@ -6,26 +6,16 @@
 <div>
     <h4>@Model.Name</h4>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DateAddded)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DateAddded)
-        </dd>
-    </dl>
+    <div>
+        <strong>Name of Goal: </strong> @Model.Name
+        <br />
+        <strong>Description of Goal: </strong>
+        <p style="overflow-wrap:break-word;">
+            @Model.Description
+        </p>
+        <strong>Date Added: </strong> @Model.DateAddded
+    </div>
 </div>
 <a asp-action="EditGoal" asp-route-goalId="@Model.GoalID" class="btn btn-primary mt-2">Edit @Model.Name</a>
+<a asp-action="DeleteGoal" asp-route-goalId="@Model.GoalID" class="btn btn-danger mt-2">Delete @Model.Name</a>
 <a asp-action="Goals" class="btn btn-secondary mt-2">Go back to Goals</a>
