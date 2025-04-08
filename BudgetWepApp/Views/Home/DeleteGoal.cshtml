@@ -1,0 +1,20 @@
+﻿@model BudgetWepApp.Models.Goal
+@{
+    ViewData["Title"] = "Delete Goal";
+}
+<h1>Are you sure you want to delete these goals?</h1>
+<div>
+    <strong>Name of Goal:</strong> @Model.Name 
+    <br />
+    <strong>Description of Goal:</strong> 
+    <p style="overflow-wrap:break-word;">
+        @Model.Description
+    </p>
+    <strong>Date Added:</strong> @Model.DateAddded
+</div>
+
+<form asp-action="ConfirmDelete" method="post">
+    <input type="hidden" name="goalId" value="@Model.GoalID" />
+    <button type="submit" class="btn btn-danger mt-3">Delete</button>
+    <a asp-action="Goals" class="btn btn-secondary mt-3">Cancel</a>
+</form>
