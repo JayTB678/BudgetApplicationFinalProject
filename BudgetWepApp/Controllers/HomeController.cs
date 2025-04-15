@@ -17,9 +17,14 @@ namespace BudgetWepApp.Controllers
 
         public IActionResult Index()
         {
-            int userId = 1;
-            var goals = context.Goals.Where(g => g.UserID == userId).ToList();
-            return View(goals);
+            int userID = 1;
+            var model = new UserViewModel();
+            model.User = context.Users.FirstOrDefault(u => u.UserID == userID);
+            model.Goals = context.Goals.Where(g => g.User.UserID == userID).ToList();
+            model.Income = context.Incomes.Where(i => i.User.UserID == userID).ToList();
+            model.RecurringPayments = context.recurringPayments.Where(r => r.User.UserID == userID).ToList();
+            model.Transactions = context.Transactions.Where(t => t.User.UserID == userID).OrderByDescending(t => t.TransactionID).ToList();
+            return View(model);
         }
 
         public IActionResult Contact()

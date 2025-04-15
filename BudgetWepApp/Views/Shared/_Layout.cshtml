@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BudgetWepApp.styles.css" asp-append-version="true" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Makes the nav bar activate on hover-->
     <style>
@@ -48,8 +49,8 @@
                                 <li><a class="dropdown-item" href="/home/privacy">Privacy</a></li>
                             </ul>
                         </li>
-
                     </ul>
+                    <a class="btn btn-primary" asp-controller="Home" asp-action="SignUp">Log</a>
                 </div>
             </div>
         </nav>
