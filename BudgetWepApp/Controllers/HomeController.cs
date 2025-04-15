@@ -142,20 +142,20 @@ namespace BudgetWepApp.Controllers
         public IActionResult BankAccountInfo(UserViewModel model)
         {
             //this will be got from session later
-            
 
+            string userID = "1";
             //Populates the model
-           // model.User = context.Users.FirstOrDefault(u => u.UserID == userID);
-           //
-           // if (model.User == null)
-           // {
-           //     return NotFound("User not found");
-           // }
-           //
-           // model.Goals = context.Goals.Where(g => g.User.UserID == userID).ToList();
-           // model.Income = context.Incomes.Where(i => i.User.UserID == userID).ToList();
-           // model.RecurringPayments = context.recurringPayments.Where(r => r.User.UserID == userID).ToList();
-           // model.Transactions = context.Transactions.Where(t => t.User.UserID == userID).OrderByDescending(t =>t.TransactionID).ToList();
+            model.User = context.Users.FirstOrDefault(u => u.Id == userID);
+           
+            if (model.User == null)
+            {
+                return NotFound("User not found");
+           }
+           
+            model.Goals = context.Goals.Where(g => g.User.Id == userID).ToList();
+            model.Income = context.Incomes.Where(i => i.User.Id == userID).ToList();
+            model.RecurringPayments = context.recurringPayments.Where(r => r.User.Id == userID).ToList();
+            model.Transactions = context.Transactions.Where(t => t.User.Id == userID).OrderByDescending(t =>t.TransactionID).ToList();
 
             return View(model);
         }
