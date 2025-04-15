@@ -1,0 +1,27 @@
+﻿@model BudgetWepApp.Models.Goal
+@{
+    ViewBag.Title = "Edit Goal";
+}
+
+<h2>Editing @Model.Name</h2>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-action="EditGoal" method="post">
+    <div class="form-gorup">
+        <label asp-for="Name">Name of Goal:</label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Description of Goal:</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <label asp-for="DateAddded">Date:</label>
+        <input type="text" class="form-control" value="@DateTime.Now" readonly />
+    </div>
+    <input type="hidden" asp-for="GoalID" />
+    <input type="hidden" asp-for="UserID" value="1" />
+    <button type="submit" class="btn btn-success mt-2">Save Goal</button>
+    <a asp-action="Goals" class="btn btn-secondary mt-2">Cancel</a>
+</form>

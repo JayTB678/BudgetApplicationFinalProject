@@ -1,4 +1,4 @@
-﻿@model UserViewModel
+@model UserViewModel
 @{
     ViewData["Title"] = "Home Page";
     var golTot = 0;
@@ -34,9 +34,23 @@
                  golTot = golTot + 1;
             }
             <div class="col">
-                <div class="p-3 border bg-light text-center">Number of Goals</div>
+                <div class="p-3 border bg-light text-center">My Goals</div>
                 <div class="p-3 border bg-light">
+
+                    <div class="goalCard">
+                        @foreach (var goal in Model)
+                        {
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                        <h5 class="card-title">@goal.Name</h5>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <a class="btn btn-primary" asp-controller="Home"
+
                     @golTot <a class="btn btn-primary" asp-controller="Home"
+
                               asp-action="Goals">
                         Add Goals
                     </a>
@@ -93,7 +107,7 @@
     </div>
 
 </div>
-
+<script>
     const ctx = document.getElementById('myChart');
     @foreach (Transaction transaction in Model.Transactions)
     {

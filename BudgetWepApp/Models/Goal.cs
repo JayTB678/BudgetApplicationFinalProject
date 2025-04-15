@@ -1,4 +1,6 @@
-﻿namespace BudgetWepApp.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BudgetWepApp.Models
 {
     public class Goal
     {

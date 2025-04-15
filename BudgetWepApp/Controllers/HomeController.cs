@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Security.Principal;
 using BudgetWepApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BudgetWepApp.Controllers
 {
@@ -31,11 +32,101 @@ namespace BudgetWepApp.Controllers
             return View();
         }
 
-        public IActionResult Goals()
+        public IActionResult Goals(Goal goal)
         {
-            return View();
-        }
+            int userId = 1;
+			var goals = context.Goals.Where(g => g.UserID == userId).ToList() ?? new List<Goal>();
+			return View(goals);
+		}
 
+		public IActionResult CreateGoal()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		public IActionResult CreateGoal(Goal goal)
+		{
+			if (goal.UserID == 0)
+			{
+				goal.UserID = 1;
+			}
+
+			goal.User = context.Users.FirstOrDefault(u => u.UserID == goal.UserID);
+
+			if (goal.User == null)
+			{
+				ModelState.AddModelError("", "User not found.");
+			}
+			goal.DateAddded = DateTime.Now;
+			context.Goals.Add(goal);
+			context.SaveChanges();
+			return RedirectToAction("Goals", new { userId = goal.UserID });
+		}
+        [HttpGet]
+        public IActionResult GoalDetails(int goalId)
+        {
+            var goal = context.Goals.FirstOrDefault(g => g.GoalID == goalId);
+            if (goal == null)
+            {
+                return NotFound("Goal not found");
+            }
+            return View(goal);
+        }
+        [HttpGet]
+        public IActionResult EditGoal(int goalId)
+        {
+            var goal = context.Goals.FirstOrDefault(g => g.GoalID == goalId);
+            if (goal == null)
+            {
+                return NotFound("Goal not found");
+            }
+            return View(goal);
+        }
+        [HttpPost]
+        public IActionResult EditGoal(Goal goal)
+        {
+            if (ModelState.IsValid)
+            {
+                var goalToUpdate = context.Goals.FirstOrDefault(g => g.GoalID == goal.GoalID);
+                if (goalToUpdate != null)
+                {
+                    goalToUpdate.Name = goal.Name;
+                    goalToUpdate.Description = goal.Description;
+                    goalToUpdate.DateAddded = DateTime.Now;
+                    context.SaveChanges();
+                    return RedirectToAction("Goals", new { userId = goalToUpdate.UserID });
+                }
+                else
+                {
+                    return NotFound("Goal not found");
+                }
+            }
+            return View(goal);
+        }
+        [HttpGet]
+        public IActionResult DeleteGoal(int goalId)
+        {
+           var goal = context.Goals.FirstOrDefault(g => g.GoalID == goalId);
+            if (goal == null)
+            {
+                return NotFound("Goal not found");
+            }
+            return View(goal);
+        }
+        [HttpPost]
+        public IActionResult ConfirmDelete(int goalId)
+        {
+            var goal = context.Goals.FirstOrDefault(g => g.GoalID == goalId);
+
+            if (goal != null)
+            {
+                context.Goals.Remove(goal);
+                context.SaveChanges();
+            }
+
+            return RedirectToAction("Goals");
+        }
         public IActionResult Privacy()
         {
             return View();

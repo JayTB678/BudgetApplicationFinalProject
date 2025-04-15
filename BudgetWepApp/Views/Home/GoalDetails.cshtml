@@ -1,0 +1,21 @@
+﻿@model BudgetWepApp.Models.Goal
+@{
+    ViewBag.Title = "Goal Details";
+}
+<h2>Goal Details</h2>
+<div>
+    <h4>@Model.Name</h4>
+    <hr />
+    <div>
+        <strong>Name of Goal: </strong> @Model.Name
+        <br />
+        <strong>Description of Goal: </strong>
+        <p style="overflow-wrap:break-word;">
+            @Model.Description
+        </p>
+        <strong>Date Added: </strong> @Model.DateAddded
+    </div>
+</div>
+<a asp-action="EditGoal" asp-route-goalId="@Model.GoalID" class="btn btn-primary mt-2">Edit @Model.Name</a>
+<a asp-action="DeleteGoal" asp-route-goalId="@Model.GoalID" class="btn btn-danger mt-2">Delete @Model.Name</a>
+<a asp-action="Goals" class="btn btn-secondary mt-2">Go back to Goals</a>
