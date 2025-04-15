@@ -1,5 +1,6 @@
 using BudgetWepApp.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace BudgetWepApp
 {
@@ -11,6 +12,10 @@ namespace BudgetWepApp
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            var connectionString = builder.Configuration.GetConnectionString("BudgetDb") ?? throw new InvalidOperationException();
+            builder.Services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<UserContext>()
+                .AddDefaultTokenProviders();
 
             builder.Services.AddDbContext<UserContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("BudgetDb")));
@@ -30,7 +35,9 @@ namespace BudgetWepApp
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+
 
             app.MapControllerRoute(
                 name: "default",
