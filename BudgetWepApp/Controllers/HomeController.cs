@@ -228,9 +228,91 @@ namespace BudgetWepApp.Controllers
             return RedirectToAction("BankAccountInfo");
         }
 
-        public IActionResult WithdrawalsPage()
+        public IActionResult WithdrawalsPage(UserViewModel model)
         {
-            return View();
+            //this will be got from session later
+            int userID = 1;
+
+            //Populates the model
+            model.User = context.Users.FirstOrDefault(u => u.UserID == userID);
+
+            if (model.User == null)
+            {
+                return NotFound("User not found");
+            }
+
+            model.Goals = context.Goals.Where(g => g.User.UserID == userID).ToList();
+            model.Income = context.Incomes.Where(i => i.User.UserID == userID).ToList();
+            model.RecurringPayments = context.recurringPayments.Where(r => r.User.UserID == userID).ToList();
+            model.Transactions = context.Transactions.Where(t => t.User.UserID == userID).OrderByDescending(t => t.TransactionID).ToList();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult AddPayment(NewTransationViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = context.Users.FirstOrDefault(u => u.UserID == 1);
+
+                if (user == null)
+                {
+                    return NotFound("User not found");
+                }
+
+                if (model.Amount <= 0)
+                {
+                    return BadRequest("Number not positive");
+                }
+
+                if (model.FrequencyInDays > 0)
+                {
+                    var newPayment = new RecurringPayment()
+                    {
+                        User = user,
+                        PaymentAmount = model.Amount,
+                        PaymenFrequencyDays = model.FrequencyInDays ?? 0,
+                        DaysTillNextPayment = model.FrequencyInDays ?? 0
+                    };
+
+                    context.recurringPayments.Add(newPayment);
+                }
+
+                if (model.UpdateTransactions)
+                {
+                    var newTransaction = new Transaction()
+                    {
+                        User = user,
+                        TimeStamp = DateTime.Now,
+                        Ammount = model.Amount * -1
+                    };
+
+                    context.Transactions.Add(newTransaction);
+
+                    user.CurrentBalance -= model.Amount;
+                }
+
+                context.SaveChanges();
+
+                return RedirectToAction("WithdrawalsPage");
+            }
+
+            return View("WithdrawalsPage");
+        }
+
+        [HttpPost]
+        public IActionResult RemovePayment(int paymentId)
+        {
+            var payment = context.recurringPayments.FirstOrDefault(p => p.RecurringPaymentId == paymentId);
+
+            if (payment != null)
+            {
+                context.recurringPayments.Remove(payment);
+                context.SaveChanges();
+            }
+
+            return RedirectToAction("WithdrawalsPage");
         }
     }
 }

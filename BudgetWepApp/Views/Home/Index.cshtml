@@ -38,7 +38,7 @@
                 <div class="p-3 border bg-light">
 
                     <div class="goalCard">
-                        @foreach (var goal in Model)
+                        @foreach (var goal in Model.Goals)
                         {
                             <div class="card mb-3">
                                 <div class="card-body">
@@ -47,13 +47,9 @@
                             </div>
                         }
                     </div>
-                    <a class="btn btn-primary" asp-controller="Home"
+                    <a class="btn btn-primary" asp-controller="Home"></a>
 
-                    @golTot <a class="btn btn-primary" asp-controller="Home"
-
-                              asp-action="Goals">
-                        Add Goals
-                    </a>
+                    @golTot <a class="btn btn-primary" asp-controller="Home" asp-action="Goals"> Add Goals</a>
                 </div>
             </div>
     </div>
