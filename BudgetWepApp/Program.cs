@@ -12,7 +12,7 @@ namespace BudgetWepApp
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
+            var connectionString = builder.Configuration.GetConnectionString("BudgetDb") ?? throw new InvalidOperationException();
             builder.Services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<UserContext>()
                 .AddDefaultTokenProviders();
@@ -35,8 +35,9 @@ namespace BudgetWepApp
 
             app.UseRouting();
 
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseAuthorization();
+
 
             app.MapControllerRoute(
                 name: "default",

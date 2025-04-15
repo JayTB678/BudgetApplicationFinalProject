@@ -11,5 +11,10 @@ namespace BudgetWepApp.Models
         public double CurrentBalance { get; set; }
         public bool IsAdmin { get; set; }
         public DateTime AccountCreationDate { get; set; }
+
+        public virtual ICollection<Goal>? Goals { get; set; }
+        public virtual ICollection<Income>? Incomes { get; set; }
+        public virtual ICollection<Transaction>? Transactions { get; set; }
+        public virtual ICollection<RecurringPayment>? RecurringPayments { get; set; }
     }
 }
