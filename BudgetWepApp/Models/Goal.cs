@@ -12,5 +12,6 @@ namespace BudgetWepApp.Models
         [Required(ErrorMessage = "Please enter a description for the goal.")]
         public string? Description { get; set; }
         public DateTime DateAddded { get; set; }
+        public bool IsCompleted { get; set; }
     }
 }

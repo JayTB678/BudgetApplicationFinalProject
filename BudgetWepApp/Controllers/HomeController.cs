@@ -122,6 +122,17 @@ namespace BudgetWepApp.Controllers
 
             return RedirectToAction("Goals");
         }
+        [HttpPost]
+        public IActionResult UpdateCompletedGoal(int GoalID, bool Completed)
+        {
+            var goal = context.Goals.FirstOrDefault(g => g.GoalID == GoalID);
+            if (goal != null)
+            {
+                goal.IsCompleted = Completed;
+                context.SaveChanges();
+            }
+            return RedirectToAction("GoalDetails", new {goalId = GoalID });
+        }
         public IActionResult Privacy()
         {
             return View();
