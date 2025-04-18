@@ -26,7 +26,7 @@ namespace BudgetWepApp.Controllers
             return View(model);
         }
         [HttpGet]
-        public IActionResult Register()
+        public IActionResult SignUp()
         {
             return View();
         }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,5 +17,7 @@ namespace BudgetWepApp.Models
         public virtual ICollection<Income>? Incomes { get; set; }
         public virtual ICollection<Transaction>? Transactions { get; set; }
         public virtual ICollection<RecurringPayment>? RecurringPayments { get; set; }
+        [NotMapped]
+        public IList<String> RoleNames { get; set; } = null!;
     }
 }
