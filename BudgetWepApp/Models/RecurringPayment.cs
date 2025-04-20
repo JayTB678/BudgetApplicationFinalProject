@@ -6,6 +6,6 @@
         public User User { get; set; }
         public double PaymentAmount { get; set; }
         public int PaymenFrequencyDays { get; set; }
-        public int DaysTillNextPayment { get; set; }
+        public DateTime StartingDate { get; set; }
     }
 }
