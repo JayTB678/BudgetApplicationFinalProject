@@ -1,4 +1,5 @@
 ﻿using AspNetCoreGeneratedDocument;
+using Microsoft.AspNetCore.Identity;
 
 namespace BudgetWepApp.Models
 {
@@ -15,5 +16,8 @@ namespace BudgetWepApp.Models
         public List<Income> Income { get; set; }
         public List<RecurringPayment> RecurringPayments { get; set; }
         public List<Transaction> Transactions { get; set; }
+
+        public IEnumerable<User> Users { get; set; } = null!;
+        public IEnumerable<IdentityRole> Roles { get; set; } = null!;
     }
 }

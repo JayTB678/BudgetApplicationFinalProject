@@ -17,13 +17,13 @@ namespace BudgetWepApp.Controllers
 
         public IActionResult Index()
         {
-            int userID = 1;
+            string userID = "1";
             var model = new UserViewModel();
-            model.User = context.Users.FirstOrDefault(u => u.UserID == userID);
-            model.Goals = context.Goals.Where(g => g.User.UserID == userID).ToList();
-            model.Income = context.Incomes.Where(i => i.User.UserID == userID).ToList();
-            model.RecurringPayments = context.recurringPayments.Where(r => r.User.UserID == userID).ToList();
-            model.Transactions = context.Transactions.Where(t => t.User.UserID == userID).OrderByDescending(t => t.TransactionID).ToList();
+            model.User = context.Users.FirstOrDefault(u => u.Id == userID);
+            model.Goals = context.Goals.Where(g => g.User.Id == userID).ToList();
+            model.Income = context.Incomes.Where(i => i.User.Id == userID).ToList();
+            model.RecurringPayments = context.recurringPayments.Where(r => r.User.Id == userID).ToList();
+            model.Transactions = context.Transactions.Where(t => t.User.Id == userID).OrderByDescending(t => t.TransactionID).ToList();
             return View(model);
         }
 
@@ -34,8 +34,8 @@ namespace BudgetWepApp.Controllers
 
         public IActionResult Goals(Goal goal)
         {
-            int userId = 1;
-			var goals = context.Goals.Where(g => g.UserID == userId).ToList() ?? new List<Goal>();
+            string userId = "1";
+			var goals = context.Goals.Where(g => g.userId == userId).ToList() ?? new List<Goal>();
 			return View(goals);
 		}
 
@@ -47,12 +47,12 @@ namespace BudgetWepApp.Controllers
 		[HttpPost]
 		public IActionResult CreateGoal(Goal goal)
 		{
-			if (goal.UserID == 0)
+			if (goal.userId == "0")
 			{
-				goal.UserID = 1;
+				goal.userId = "1";
 			}
 
-			goal.User = context.Users.FirstOrDefault(u => u.UserID == goal.UserID);
+			goal.User = context.Users.FirstOrDefault(u => u.Id == goal.userId);
 
 			if (goal.User == null)
 			{
@@ -61,7 +61,7 @@ namespace BudgetWepApp.Controllers
 			goal.DateAddded = DateTime.Now;
 			context.Goals.Add(goal);
 			context.SaveChanges();
-			return RedirectToAction("Goals", new { userId = goal.UserID });
+			return RedirectToAction("Goals", new { userId = goal.userId });
 		}
         [HttpGet]
         public IActionResult GoalDetails(int goalId)
@@ -95,7 +95,7 @@ namespace BudgetWepApp.Controllers
                     goalToUpdate.Description = goal.Description;
                     goalToUpdate.DateAddded = DateTime.Now;
                     context.SaveChanges();
-                    return RedirectToAction("Goals", new { userId = goalToUpdate.UserID });
+                    return RedirectToAction("Goals", new { userId = goalToUpdate.userId });
                 }
                 else
                 {
@@ -142,20 +142,20 @@ namespace BudgetWepApp.Controllers
         public IActionResult BankAccountInfo(UserViewModel model)
         {
             //this will be got from session later
-            int userID = 1;
 
+            string userID = "1";
             //Populates the model
-            model.User = context.Users.FirstOrDefault(u => u.UserID == userID);
-
+            model.User = context.Users.FirstOrDefault(u => u.Id == userID);
+           
             if (model.User == null)
             {
                 return NotFound("User not found");
-            }
-
-            model.Goals = context.Goals.Where(g => g.User.UserID == userID).ToList();
-            model.Income = context.Incomes.Where(i => i.User.UserID == userID).ToList();
-            model.RecurringPayments = context.recurringPayments.Where(r => r.User.UserID == userID).ToList();
-            model.Transactions = context.Transactions.Where(t => t.User.UserID == userID).OrderByDescending(t =>t.TransactionID).ToList();
+           }
+           
+            model.Goals = context.Goals.Where(g => g.User.Id == userID).ToList();
+            model.Income = context.Incomes.Where(i => i.User.Id == userID).ToList();
+            model.RecurringPayments = context.recurringPayments.Where(r => r.User.Id == userID).ToList();
+            model.Transactions = context.Transactions.Where(t => t.User.Id == userID).OrderByDescending(t =>t.TransactionID).ToList();
 
             return View(model);
         }
@@ -165,7 +165,9 @@ namespace BudgetWepApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = context.Users.FirstOrDefault(u => u.UserID == 1);
+
+                User user = context.Users.FirstOrDefault();
+                
 
                 if (user == null)
                 {
@@ -229,20 +231,20 @@ namespace BudgetWepApp.Controllers
         public IActionResult WithdrawalsPage(UserViewModel model)
         {
             //this will be got from session later
-            int userID = 1;
+            string userID = "1";
 
             //Populates the model
-            model.User = context.Users.FirstOrDefault(u => u.UserID == userID);
+            model.User = context.Users.FirstOrDefault(u => u.Id == userID);
 
             if (model.User == null)
             {
                 return NotFound("User not found");
             }
 
-            model.Goals = context.Goals.Where(g => g.User.UserID == userID).ToList();
-            model.Income = context.Incomes.Where(i => i.User.UserID == userID).ToList();
-            model.RecurringPayments = context.recurringPayments.Where(r => r.User.UserID == userID).ToList();
-            model.Transactions = context.Transactions.Where(t => t.User.UserID == userID).OrderByDescending(t => t.TransactionID).ToList();
+            model.Goals = context.Goals.Where(g => g.User.Id == userID).ToList();
+            model.Income = context.Incomes.Where(i => i.User.Id == userID).ToList();
+            model.RecurringPayments = context.recurringPayments.Where(r => r.User.Id == userID).ToList();
+            model.Transactions = context.Transactions.Where(t => t.User.Id == userID).OrderByDescending(t => t.TransactionID).ToList();
 
             return View(model);
         }
@@ -252,7 +254,7 @@ namespace BudgetWepApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = context.Users.FirstOrDefault(u => u.UserID == 1);
+                User user = context.Users.FirstOrDefault(u => u.Id == "1");
 
                 if (user == null)
                 {

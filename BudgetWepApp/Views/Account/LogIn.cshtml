@@ -1,0 +1,38 @@
+﻿@model LoginViewModel
+@{
+    Layout = "log-signLayout";
+}
+<div style="margin-top: 50px; margin-left: 250px;margin-right: 250px; border: 2px solid black">
+    <h2 class="text-center">Budget App PlaceHolder Title</h2>
+    <form asp-action="LogIn" method="post" asp-route-returnUrl="@Model.returnUrl" style="margin: 50px;">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="row mb-2">
+            <label class="form-label" style="display: inline-block;width: 30% ">Username</label>
+            <input asp-for="UserName" class="form-control" style="width: 30%" />
+            <div class="col">
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <label class="form-label" style="display: inline-block;width: 30%">Password</label>
+            <input asp-for="Password" class="form-control" style="width: 30%" />
+            <div class="col">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <input type="checkbox" title="Remember Me" asp-for="rememberMe" class="form-check-inline" style="width: 30%" />
+            <label>Remember Me</label>
+            <div class="col">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+        <button type="submit" class="btn btn-primary">Log In</button>
+        <a asp-action="Index" asp-controller="Home" class="btn btn-primary">Cancel</a>
+        </div>
+        <div class="row">
+        <a class="nav-link text-dark btn btn-primary" asp-controller="Account" asp-action="Signup">Sign Up</a>
+        </div>
+    </form>
+</div>
