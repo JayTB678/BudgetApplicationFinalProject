@@ -37,6 +37,9 @@ namespace BudgetWepApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -57,6 +60,7 @@ namespace BudgetWepApp.Migrations
                             GoalID = 1,
                             DateAddded = new DateTime(2025, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "This is the first goal.",
+                            IsCompleted = false,
                             Name = "Goal 1",
                             userId = "1"
                         },
@@ -65,6 +69,7 @@ namespace BudgetWepApp.Migrations
                             GoalID = 2,
                             DateAddded = new DateTime(2020, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "This is the second goal.",
+                            IsCompleted = false,
                             Name = "Goal 2",
                             userId = "2"
                         });

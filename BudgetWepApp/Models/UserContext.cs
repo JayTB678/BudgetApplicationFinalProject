@@ -43,20 +43,22 @@ namespace BudgetWepApp.Models
             modelBuilder.Entity<Goal>().HasData(
 
                 new
-                { 
+                {
                     GoalID = 1,
                     userId = "1",
                     Name = "Goal 1",
                     Description = "This is the first goal.",
-                    DateAddded = new DateTime(2025, 3, 3)
+                    DateAddded = new DateTime(2025, 3, 3),
+                    IsCompleted = false
                 },
                 new
-                { 
+                {
                     GoalID = 2,
                     userId = "2",
                     Name = "Goal 2",
                     Description = "This is the second goal.",
-                    DateAddded = new DateTime(2020, 3, 3)
+                    DateAddded = new DateTime(2020, 3, 3),
+                    IsCompleted = false
                 }
             );
 
