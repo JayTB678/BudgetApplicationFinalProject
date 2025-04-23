@@ -2,13 +2,11 @@ using BudgetWepApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
-namespace BudgetWepApp
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
+
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddMemoryCache();
+            builder.Services.AddSession();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
@@ -35,8 +33,17 @@ namespace BudgetWepApp
 
             app.UseRouting();
 
+            
             app.UseAuthentication();
             app.UseAuthorization();
+
+            var scopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
+            using(var scope = scopeFactory.CreateScope())
+            {
+                await UserContext.CreateAdminUser(scope.ServiceProvider);
+            }
+
+            app.UseSession();
 
             app.MapControllerRoute(
             name: "areas",
@@ -47,6 +54,4 @@ namespace BudgetWepApp
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
-        }
-    }
-}
+

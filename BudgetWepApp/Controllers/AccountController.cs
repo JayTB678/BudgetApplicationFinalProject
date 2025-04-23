@@ -19,6 +19,10 @@ namespace BudgetWepApp.Controllers
         {
             return View();
         }
+        public ViewResult AccessDenied(){
+            return View();
+            }
+
         [HttpGet]
         public IActionResult LogIn(string returnURL = "")
         {
