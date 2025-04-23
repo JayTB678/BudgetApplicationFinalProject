@@ -29,7 +29,12 @@
                     <div class="scroll-box" style="height: 300px; overflow-y: scroll;">
                         @foreach (Income income in @Model.Income)
                         {
-                            <div class="p-1 col-11 border bg-light mb-2">every @income.PayPeriodDays day(s). @income.DaysTillNextPayment day(s) till next payment.</div>
+                            DateTime now = DateTime.Now;
+                            int intervalsPassed = (int)((now - income.StartingDate).TotalDays / income.PayPeriodDays);
+                            DateTime nextPaymentDate = income.StartingDate.AddDays((intervalsPassed + 1) * income.PayPeriodDays);
+                            TimeSpan timeUntilNextPayment = nextPaymentDate - now;
+
+                            <div class="p-1 col-11 border bg-light mb-2">every @income.PayPeriodDays day(s). @timeUntilNextPayment.Days day(s) till next payment.</div>
                             <div class="p-3 col-11 border mb-2 text-center text-success">+ @income.IncomeAmmount.ToString("C")</div>
 
                             <form asp-action="RemoveIncome" method="post" class="mb-2">

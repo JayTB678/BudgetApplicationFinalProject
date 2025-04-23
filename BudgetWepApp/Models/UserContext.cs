@@ -68,7 +68,7 @@ namespace BudgetWepApp.Models
                     userId = "1",
                     IncomeAmmount = 100.00,
                     PayPeriodDays = 14,
-                    DaysTillNextPayment = 5
+                    StartingDate = new DateTime(2025, 4, 20)
                 },
                 new
                 {
@@ -76,7 +76,7 @@ namespace BudgetWepApp.Models
                     userId = "2",
                     IncomeAmmount = 200.00,
                     PayPeriodDays = 7,
-                    DaysTillNextPayment = 5
+                    StartingDate = new DateTime(2025, 4, 20)
                 }
             );
 
@@ -88,7 +88,7 @@ namespace BudgetWepApp.Models
                     userId = "1",
                     PaymentAmount = 100.00,
                     PaymenFrequencyDays = 14,
-                    DaysTillNextPayment = 5
+                    StartingDate = new DateTime(2025, 4, 20)
                 },
                 new
                 {
@@ -96,7 +96,7 @@ namespace BudgetWepApp.Models
                     userId = "2",
                     PaymentAmount = 200.00,
                     PaymenFrequencyDays = 7,
-                    DaysTillNextPayment = 5
+                    StartingDate = new DateTime(2025, 4, 20)
                 }
             );
 

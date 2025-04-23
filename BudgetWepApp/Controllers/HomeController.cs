@@ -186,7 +186,7 @@ namespace BudgetWepApp.Controllers
                         User = user,
                         IncomeAmmount = model.Amount,
                         PayPeriodDays = model.FrequencyInDays ?? 0,
-                        DaysTillNextPayment = model.FrequencyInDays ?? 0
+                        StartingDate = DateTime.Now,
                     };
 
                     context.Incomes.Add(newIncome);
@@ -273,7 +273,7 @@ namespace BudgetWepApp.Controllers
                         User = user,
                         PaymentAmount = model.Amount,
                         PaymenFrequencyDays = model.FrequencyInDays ?? 0,
-                        DaysTillNextPayment = model.FrequencyInDays ?? 0
+                        StartingDate = DateTime.Now,
                     };
 
                     context.recurringPayments.Add(newPayment);
