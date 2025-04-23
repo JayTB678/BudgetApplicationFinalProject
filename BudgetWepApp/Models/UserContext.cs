@@ -43,20 +43,22 @@ namespace BudgetWepApp.Models
             modelBuilder.Entity<Goal>().HasData(
 
                 new
-                { 
+                {
                     GoalID = 1,
                     userId = "1",
                     Name = "Goal 1",
                     Description = "This is the first goal.",
-                    DateAddded = new DateTime(2025, 3, 3)
+                    DateAddded = new DateTime(2025, 3, 3),
+                    IsCompleted = false
                 },
                 new
-                { 
+                {
                     GoalID = 2,
                     userId = "2",
                     Name = "Goal 2",
                     Description = "This is the second goal.",
-                    DateAddded = new DateTime(2020, 3, 3)
+                    DateAddded = new DateTime(2020, 3, 3),
+                    IsCompleted = false
                 }
             );
 
@@ -68,7 +70,7 @@ namespace BudgetWepApp.Models
                     userId = "1",
                     IncomeAmmount = 100.00,
                     PayPeriodDays = 14,
-                    DaysTillNextPayment = 5
+                    StartingDate = new DateTime(2025, 4, 20)
                 },
                 new
                 {
@@ -76,7 +78,7 @@ namespace BudgetWepApp.Models
                     userId = "2",
                     IncomeAmmount = 200.00,
                     PayPeriodDays = 7,
-                    DaysTillNextPayment = 5
+                    StartingDate = new DateTime(2025, 4, 20)
                 }
             );
 
@@ -88,7 +90,7 @@ namespace BudgetWepApp.Models
                     userId = "1",
                     PaymentAmount = 100.00,
                     PaymenFrequencyDays = 14,
-                    DaysTillNextPayment = 5
+                    StartingDate = new DateTime(2025, 4, 20)
                 },
                 new
                 {
@@ -96,7 +98,7 @@ namespace BudgetWepApp.Models
                     userId = "2",
                     PaymentAmount = 200.00,
                     PaymenFrequencyDays = 7,
-                    DaysTillNextPayment = 5
+                    StartingDate = new DateTime(2025, 4, 20)
                 }
             );
 

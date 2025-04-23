@@ -29,7 +29,12 @@
                     <div class="scroll-box" style="height: 300px; overflow-y: scroll;">
                         @foreach (RecurringPayment payment in @Model.RecurringPayments)
                         {
-                            <div class="p-1 col-11 border bg-light mb-2">every @payment.PaymenFrequencyDays day(s). @payment.DaysTillNextPayment day(s) till next payment.</div>
+                            DateTime now = DateTime.Now;
+                            int intervalsPassed = (int)((now - payment.StartingDate).TotalDays / payment.PaymenFrequencyDays);
+                            DateTime nextPaymentDate = payment.StartingDate.AddDays((intervalsPassed + 1) * payment.PaymenFrequencyDays);
+                            TimeSpan timeUntilNextPayment = nextPaymentDate - now;
+
+                            <div class="p-1 col-11 border bg-light mb-2">every @payment.PaymenFrequencyDays day(s). @timeUntilNextPayment.Days day(s) till next payment.</div>
                             <div class="p-3 col-11 border mb-2 text-center text-danger">- @payment.PaymentAmount.ToString("C")</div>
 
                             <form asp-action="RemovePayment" method="post" class="mb-2">

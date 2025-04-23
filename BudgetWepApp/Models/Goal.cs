@@ -10,5 +10,6 @@ namespace BudgetWepApp.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime DateAddded { get; set; }
+        public bool IsCompleted { get; set; }
     }
 }

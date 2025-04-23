@@ -37,6 +37,9 @@ namespace BudgetWepApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -57,6 +60,7 @@ namespace BudgetWepApp.Migrations
                             GoalID = 1,
                             DateAddded = new DateTime(2025, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "This is the first goal.",
+                            IsCompleted = false,
                             Name = "Goal 1",
                             userId = "1"
                         },
@@ -65,6 +69,7 @@ namespace BudgetWepApp.Migrations
                             GoalID = 2,
                             DateAddded = new DateTime(2020, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "This is the second goal.",
+                            IsCompleted = false,
                             Name = "Goal 2",
                             userId = "2"
                         });
@@ -78,15 +83,16 @@ namespace BudgetWepApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IncomeID"));
 
-                    b.Property<int>("DaysTillNextPayment")
-                        .HasColumnType("int");
-
                     b.Property<double>("IncomeAmmount")
                         .HasColumnType("float");
 
                     b.Property<int>("PayPeriodDays")
                         .HasColumnType("int");
 
+
+                    b.Property<DateTime>("StartingDate")
+                        .HasColumnType("datetime2");
+                        
                     b.Property<string>("userId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -101,17 +107,22 @@ namespace BudgetWepApp.Migrations
                         new
                         {
                             IncomeID = 1,
-                            DaysTillNextPayment = 5,
                             IncomeAmmount = 100.0,
                             PayPeriodDays = 14,
+
+                            StartingDate = new DateTime(2025, 4, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+
                             userId = "1"
+
                         },
                         new
                         {
                             IncomeID = 2,
-                            DaysTillNextPayment = 5,
                             IncomeAmmount = 200.0,
                             PayPeriodDays = 7,
+
+                            StartingDate = new DateTime(2025, 4, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+
                             userId = "2"
                         });
                 });
@@ -124,18 +135,20 @@ namespace BudgetWepApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RecurringPaymentId"));
 
-                    b.Property<int>("DaysTillNextPayment")
-                        .HasColumnType("int");
-
                     b.Property<int>("PaymenFrequencyDays")
                         .HasColumnType("int");
 
                     b.Property<double>("PaymentAmount")
                         .HasColumnType("float");
 
+
+                    b.Property<DateTime>("StartingDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("userId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
 
                     b.HasKey("RecurringPaymentId");
 
@@ -147,18 +160,24 @@ namespace BudgetWepApp.Migrations
                         new
                         {
                             RecurringPaymentId = 1,
-                            DaysTillNextPayment = 5,
                             PaymenFrequencyDays = 14,
                             PaymentAmount = 100.0,
+
+                            StartingDate = new DateTime(2025, 4, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+
                             userId = "1"
+
                         },
                         new
                         {
                             RecurringPaymentId = 2,
-                            DaysTillNextPayment = 5,
                             PaymenFrequencyDays = 7,
                             PaymentAmount = 200.0,
+
+                            StartingDate = new DateTime(2025, 4, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+
                             userId = "2"
+
                         });
                 });
 

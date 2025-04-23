@@ -81,9 +81,15 @@
                 {
                     if (recur == Model.RecurringPayments.Last())
                     {
-                <div class="p-3 border bg-light">Current Recurring Payments</div>
+                        DateTime now = DateTime.Now;
+                        int intervalsPassed = (int)((now - recur.StartingDate).TotalDays / recur.PaymenFrequencyDays);
+                        DateTime nextPaymentDate = recur.StartingDate.AddDays((intervalsPassed + 1) * recur.PaymenFrequencyDays);
+                        TimeSpan timeUntilNextPayment = nextPaymentDate - now;
+
+
+                        <div class="p-3 border bg-light">Current Recurring Payments</div>
                         <div class="p-3 border bg-light">Amount: @recur.PaymentAmount</div>
-                        <div class="p-3 bg-light">Frequency: @recur.PaymenFrequencyDays | Till next Payment @recur.DaysTillNextPayment</div>
+                        <div class="p-3 bg-light">Frequency: @recur.PaymenFrequencyDays | Till next Payment @timeUntilNextPayment.Days</div>
                 }
                 }
             </div>
