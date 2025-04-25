@@ -48,8 +48,8 @@ namespace BudgetWepApp.Controllers
 
         public IActionResult Goals(Goal goal)
         {
-            string userId = "1";
-			var goals = context.Goals.Where(g => g.userId == userId).ToList() ?? new List<Goal>();
+            string userID = userManager.GetUserId(User);
+            var goals = context.Goals.Where(g => g.userId == userID).ToList() ?? new List<Goal>();
 			return View(goals);
 		}
 
@@ -61,12 +61,9 @@ namespace BudgetWepApp.Controllers
 		[HttpPost]
 		public IActionResult CreateGoal(Goal goal)
 		{
-			if (goal.userId == "0")
-			{
-				goal.userId = "1";
-			}
+            string userID = userManager.GetUserId(User);
 
-			goal.User = context.Users.FirstOrDefault(u => u.Id == goal.userId);
+            goal.User = context.Users.FirstOrDefault(u => u.Id == goal.userId);
 
 			if (goal.User == null)
 			{
@@ -168,7 +165,7 @@ namespace BudgetWepApp.Controllers
         {
             //this will be got from session later
 
-            string userID = "1";
+            string userID = userManager.GetUserId(User);
             //Populates the model
             model.User = context.Users.FirstOrDefault(u => u.Id == userID);
            
@@ -256,7 +253,7 @@ namespace BudgetWepApp.Controllers
         public IActionResult WithdrawalsPage(UserViewModel model)
         {
             //this will be got from session later
-            string userID = "1";
+            string userID = userManager.GetUserId(User);
 
             //Populates the model
             model.User = context.Users.FirstOrDefault(u => u.Id == userID);
