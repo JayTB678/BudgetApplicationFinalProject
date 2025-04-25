@@ -63,7 +63,7 @@ namespace BudgetWepApp.Controllers
 		{
             string userID = userManager.GetUserId(User);
 
-            goal.User = context.Users.FirstOrDefault(u => u.Id == goal.userId);
+            goal.User = context.Users.FirstOrDefault(u => u.Id == userID);
 
 			if (goal.User == null)
 			{
@@ -188,7 +188,8 @@ namespace BudgetWepApp.Controllers
             if (ModelState.IsValid)
             {
 
-                User user = context.Users.FirstOrDefault();
+                string userID = userManager.GetUserId(User);
+                User user = context.Users.FirstOrDefault(u => u.Id == userID);
                 
 
                 if (user == null)
@@ -276,7 +277,8 @@ namespace BudgetWepApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = context.Users.FirstOrDefault(u => u.Id == "1");
+                string userID = userManager.GetUserId(User);
+                User user = context.Users.FirstOrDefault(u => u.Id == userID);
 
                 if (user == null)
                 {
