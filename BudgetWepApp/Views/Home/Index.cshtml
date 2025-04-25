@@ -1,18 +1,30 @@
 @model UserViewModel
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> signInManager
 @{
     ViewData["Title"] = "Home Page";
     var golTot = 0;
     double totalExpenses = 0;
     double totalIncome = 0;
 }
-
+@if (!signInManager.IsSignedIn(User))
+{
+    <div class="col">
+        <h2 class="text-center">Please Log In</h2>
+    </div>
+}
+else{
 <div class="container px-4">
     <h2 class="text-center">Welcome</h2>
     <div class="container overflow-hidden">
     <div class="row gx-5">
-            <div class="col">
-                <div class="p-3 border bg-light text-center">Current Balance</div>
+                <div class="col">
+                    <div class="p-3 border bg-light text-center">Current Balance</div>
                 <div class="p-3 border bg-light">@Model.User.CurrentBalance</div>
+            </div>
+            <div class="col">
+                <div class="p-3 border bg-light text-center">Transactions</div>
+                <div class="p-3 border bg-light">No Transactions</div>
             </div>
             @foreach (Transaction transaction in Model.Transactions)
             {
@@ -29,6 +41,10 @@
             </div>
                 }
             }
+            <div class="col">
+                <div class="p-3 border bg-light text-center">My Goals</div>
+                <div class="p-3 border bg-light">No Goals</div>
+            </div>
             @foreach (Goal gol in Model.Goals)
             {
                  golTot = golTot + 1;
@@ -54,26 +70,27 @@
             </div>
     </div>
     </div>
-    <div class="container overflow-hidden" style="margin-top: 50px;">
-        <div class="row gx-5">
-            <div class="col">
-                <div class="p-3 border bg-light text-center">Future bar graph</div>
-                <div>
-                    <canvas id="myChart"></canvas>
+                <div class="container overflow-hidden" style="margin-top: 50px;">
+                    <div class="row gx-5">
+                <div class="col">
+                    <div class="p-3 border bg-light text-center">Future bar graph</div>
+                    <div>
+                        <canvas id="myChart"></canvas>
+                    </div>
                 </div>
-            </div>
-        @foreach (Goal goal in Model.Goals)
-            {
-            if (goal == Model.Goals.Last())
-                {
-            <div class="col">
-                <div class="p-3 border bg-light text-center">Current Goal</div>
-                <div class="p-3 border bg-light">Goal PlaceHolder</div>
-            </div>
-                }
-            }
-        </div>
-    </div>
+                    @foreach (Goal goal in Model.Goals)
+                    {
+                        if (goal == Model.Goals.Last())
+                        {
+                            <div class="col">
+                                <div class="p-3 border bg-light text-center">Current Goal</div>
+                                <div class="p-3 border bg-light">Goal PlaceHolder</div>
+                            </div>
+                        }
+                    }
+
+                </div>
+                </div>
     <div class="container overflow-hidden" style="margin-top: 50px;">
         <div class="row gx-5">
             <div class="col">
@@ -109,6 +126,11 @@
     </div>
 
 </div>
+}
+@if (!signInManager.IsSignedIn(User))
+{
+}
+else{
 <script>
     const ctx = document.getElementById('myChart');
     @foreach (Transaction transaction in Model.Transactions)
@@ -138,3 +160,4 @@
         }
     });
 </script>
+}

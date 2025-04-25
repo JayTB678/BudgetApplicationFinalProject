@@ -11,7 +11,14 @@ using Microsoft.AspNetCore.Identity;
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             var connectionString = builder.Configuration.GetConnectionString("BudgetDb") ?? throw new InvalidOperationException();
-            builder.Services.AddIdentity<User, IdentityRole>()
+            builder.Services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 3;
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+            })
                 .AddEntityFrameworkStores<UserContext>()
                 .AddDefaultTokenProviders();
 

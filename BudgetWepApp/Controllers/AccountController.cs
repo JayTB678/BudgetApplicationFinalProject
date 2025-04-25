@@ -63,6 +63,21 @@ namespace BudgetWepApp.Controllers
             {
                 var result = await signInManager.PasswordSignInAsync(
                     model.UserName, model.Password, isPersistent: model.rememberMe, lockoutOnFailure: false);
+                var user = await userManager.FindByNameAsync(model.UserName);
+
+                        // Username or password is incorrect.
+                        if (user == null)
+                        {
+                            ModelState.AddModelError("", "user.");
+                            // Username is incorrect.
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", model.UserName + " " + model.Password);
+                            // Password is incorrect.
+                        }
+                    
+       
                 if (result.Succeeded)
                 {
                     if (!string.IsNullOrEmpty(model.returnUrl) &&

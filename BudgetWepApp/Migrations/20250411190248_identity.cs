@@ -253,7 +253,7 @@ namespace BudgetWepApp.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "AccountCreationDate", "ConcurrencyStamp", "CurrentBalance", "Email", "EmailConfirmed", "IsAdmin", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "1", 0, new DateTime(2025, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "CONCURRENCYSTAMP1", 1000.0, "test1@email.com", true, true, false, null, "TEST1@EMAIL.COM", "NAME1", "password", null, false, "SECURITYSTAMP1", false, "Name1" },
+                    { "1", 0, new DateTime(2025, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "CONCURRENCYSTAMP1", 1000.0, "test1@email.com", true, true, false, null, "TEST1@EMAIL.COM", "NAME1", "password", null, false, "SECURITYSTAMP1", false, "Name" },
                     { "2", 0, new DateTime(2020, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "CONCURRENCYSTAMP2", 2000.0, "test2@email.com", true, true, false, null, "TEST2@EMAIL.COM", "NAME2", "password2", null, false, "SECURITYSTAMP2", false, "Name2" }
                 });
 

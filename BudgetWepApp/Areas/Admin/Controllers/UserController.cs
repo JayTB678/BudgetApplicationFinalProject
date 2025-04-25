@@ -53,6 +53,27 @@ namespace BudgetWepApp.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
         [HttpPost]
+        public async Task<IActionResult> Add(SignupViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new User { UserName = model.UserName };
+                var result = await userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+            }
+            return View(model);
+        }
+        [HttpPost]
         public async Task<IActionResult> AddToAdmin(string id)
         {
             IdentityRole adminRole = await roleManager.FindByNameAsync("Admin");

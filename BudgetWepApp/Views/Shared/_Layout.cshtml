@@ -53,8 +53,20 @@
                             </ul>
                         </li>
                     </ul>
-                    <a class="btn btn-primary" asp-controller="Account" asp-action="Login">Log</a>
-                    <a class="btn btn-primary" asp-controller="User" asp-area="Admin" asp-action="Index">Admin</a>
+                    @if (signInManager.IsSignedIn(User))
+                    {
+                        <li class="nav-item">
+                            <form method="post" asp-action="LogOut" asp-controller="Account" asp-area="">
+                                <input type="submit" value="Log Out" />
+                                <span class="text-light">@User.Identity.Name</span>
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <a class="btn btn-primary" asp-controller="Account" asp-action="Login">Log In</a>
+                        <a class="btn btn-primary" asp-controller="User" asp-area="Admin" asp-action="Index">Admin</a>
+                    }
                 </div>
             </div>
         </nav>

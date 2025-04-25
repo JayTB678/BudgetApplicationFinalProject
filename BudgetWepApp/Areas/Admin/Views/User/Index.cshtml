@@ -19,13 +19,14 @@
 			{
 				<tr>
 					<td>@user.UserName</td>
-					<td>@user.PasswordHash</td>
 					<td>
 						@foreach (string roleName in user.RoleNames)
 						{
 							<div>@roleName</div>
 						}
 					</td>
+					<td>@user.PasswordHash</td>
+					<td>@user.NormalizedUserName</td>
 					<td>
 						<form method="post" asp-action="Delete"
 						asp-route-id="@user.Id">
