@@ -52,7 +52,6 @@ else{
             <div class="col">
                 <div class="p-3 border bg-light text-center">My Goals</div>
                 <div class="p-3 border bg-light">
-
                     <div class="goalCard">
                         @foreach (var goal in Model.Goals)
                         {
@@ -63,9 +62,8 @@ else{
                             </div>
                         }
                     </div>
-                    <a class="btn btn-primary" asp-controller="Home"></a>
-
-                    @golTot <a class="btn btn-primary" asp-controller="Home" asp-action="Goals"> Add Goals</a>
+                    <!--<a class="btn btn-primary" asp-controller="Home"></a>-->
+                   Total Goals: @golTot <a class="btn btn-primary" asp-controller="Home" asp-action="Goals"> Add Goals</a>
                 </div>
             </div>
     </div>
