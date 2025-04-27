@@ -52,9 +52,13 @@ namespace BudgetWepApp.Controllers
             return View();
         }
 
-        public IActionResult SetTheme(string theme)
+        [HttpPost]
+        public IActionResult SetTheme()
         {
-            Response.Cookies.Append("data-bs-theme", theme, new CookieOptions
+            var currentTheme = Request.Cookies["data-bs-theme"] ?? "light";
+            var newTheme = currentTheme == "light" ? "dark" : "light";
+
+            Response.Cookies.Append("data-bs-theme", newTheme, new CookieOptions
             {
                 Expires = DateTimeOffset.UtcNow.AddYears(1),
                 HttpOnly = false,

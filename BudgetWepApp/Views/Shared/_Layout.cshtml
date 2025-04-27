@@ -68,7 +68,9 @@
                         <a class="btn btn-primary" asp-controller="Account" asp-action="Login">Log In</a>
                         <a class="btn btn-primary" asp-controller="User" asp-area="Admin" asp-action="Index">Admin</a>
                     }
-                    <button class="btn btn-danger" id="btnSwitch">Theme</button>
+                    <form asp-action="SetTheme" method="post">
+                    <button class="btn btn-danger" type="submit" >Theme</button>
+                    </form>
                 </div>
             </div>
         </nav>
