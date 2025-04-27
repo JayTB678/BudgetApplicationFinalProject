@@ -29,6 +29,12 @@ namespace BudgetWepApp.Controllers
             }
             else
             {
+                var theme = Request.Cookies["data-bs-theme"];
+                ViewBag.Theme = theme;
+                CookieOptions cookies = new CookieOptions
+                {
+                    Expires = DateTime.Now.AddDays(60)
+                };
                 string userID = userManager.GetUserId(User);
                 //string userID = "1";
                 var model = new UserViewModel();
@@ -46,6 +52,16 @@ namespace BudgetWepApp.Controllers
             return View();
         }
 
+        public IActionResult SetTheme(string theme)
+        {
+            Response.Cookies.Append("data-bs-theme", theme, new CookieOptions
+            {
+                Expires = DateTimeOffset.UtcNow.AddYears(1),
+                HttpOnly = false,
+            });
+
+            return RedirectToAction("Index", "Home");
+        }
         public IActionResult Goals(Goal goal)
         {
             string userID = userManager.GetUserId(User);
@@ -99,6 +115,7 @@ namespace BudgetWepApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                string userID = userManager.GetUserId(User);
                 var goalToUpdate = context.Goals.FirstOrDefault(g => g.GoalID == goal.GoalID);
                 if (goalToUpdate != null)
                 {
