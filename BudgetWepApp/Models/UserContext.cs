@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace BudgetWepApp.Models
 {
-    public class UserContext :IdentityDbContext<User>
+    public class UserContext :IdentityDbContext<User>, IUserContext
     {
         public UserContext(DbContextOptions<UserContext> options) : base(options){ }
 
