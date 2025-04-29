@@ -25,7 +25,9 @@ using Microsoft.AspNetCore.Identity;
             builder.Services.AddDbContext<UserContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("BudgetDb")));
 
-            var app = builder.Build();
+            builder.Services.AddScoped<IUserContext, UserContext>();
+
+var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
