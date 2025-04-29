@@ -1,4 +1,5 @@
 ﻿using BudgetWepApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,6 +14,7 @@ namespace BudgetWepApp.Controllers
             context = ctx;
             this.userManager = userManager;
         }
+        [Authorize]
         [HttpGet]
         public IActionResult BankAccountInfo(UserViewModel model)
         {
