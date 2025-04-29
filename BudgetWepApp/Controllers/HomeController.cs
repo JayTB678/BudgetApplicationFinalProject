@@ -29,6 +29,12 @@ namespace BudgetWepApp.Controllers
             }
             else
             {
+                var theme = Request.Cookies["data-bs-theme"];
+                ViewBag.Theme = theme;
+                CookieOptions cookies = new CookieOptions
+                {
+                    Expires = DateTime.Now.AddDays(60)
+                };
                 string userID = userManager.GetUserId(User);
                 //string userID = "1";
                 var model = new UserViewModel();
@@ -45,6 +51,23 @@ namespace BudgetWepApp.Controllers
         {
             return View();
         }
+
+
+        [HttpPost]
+        public IActionResult SetTheme()
+        {
+            var currentTheme = Request.Cookies["data-bs-theme"] ?? "light";
+            var newTheme = currentTheme == "light" ? "dark" : "light";
+
+            Response.Cookies.Append("data-bs-theme", newTheme, new CookieOptions
+            {
+                Expires = DateTimeOffset.UtcNow.AddYears(1),
+                HttpOnly = false,
+            });
+
+            return RedirectToAction("Index", "Home");
+        }
+        
         public IActionResult Privacy()
         {
             return View();
