@@ -1,4 +1,5 @@
 ﻿using BudgetWepApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,6 +14,7 @@ namespace BudgetWepApp.Controllers
             context = ctx;
             this.userManager = userManager;
         }
+        [Authorize]
         public IActionResult Goals()
         {
             var theme = Request.Cookies["data-bs-theme"];
@@ -26,6 +28,7 @@ namespace BudgetWepApp.Controllers
             return View(goals);
         }
 
+        [Authorize]
         public IActionResult CreateGoal()
         {
             return View();
@@ -53,6 +56,7 @@ namespace BudgetWepApp.Controllers
             context.SaveChanges();
             return RedirectToAction("Goals", new { userId = goal.userId });
         }
+        [Authorize]
         [HttpGet]
         public IActionResult GoalDetails(int goalId)
         {
@@ -69,6 +73,7 @@ namespace BudgetWepApp.Controllers
             }
             return View(goal);
         }
+        [Authorize]
         [HttpGet]
         public IActionResult EditGoal(int goalId)
         {
@@ -112,6 +117,7 @@ namespace BudgetWepApp.Controllers
             }
             return View(goal);
         }
+        [Authorize]
         [HttpGet]
         public IActionResult DeleteGoal(int goalId)
         {
