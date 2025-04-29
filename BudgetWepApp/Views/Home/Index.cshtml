@@ -33,7 +33,7 @@ else{
                     <div class="p-3 border bg-light text-center">Transactions</div>
                 <div class="p-3 border bg-light">Last Transaction @transaction.Ammount</div>
                 <div class="p-3 border bg-light">
-                    <a class="btn btn-primary" asp-controller="Home"
+                    <a class="btn btn-primary" asp-controller="Withdrawals"
                        asp-action="WithdrawalsPage">
                         Transactions
                     </a>
@@ -63,7 +63,7 @@ else{
                         }
                     </div>
                     <!--<a class="btn btn-primary" asp-controller="Home"></a>-->
-                   Total Goals: @golTot <a class="btn btn-primary" asp-controller="Home" asp-action="Goals"> Add Goals</a>
+                   Total Goals: @golTot <a class="btn btn-primary" asp-controller="Goal" asp-action="Goals"> Add Goals</a>
                 </div>
             </div>
     </div>

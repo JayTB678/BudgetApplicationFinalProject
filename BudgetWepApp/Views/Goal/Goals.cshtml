@@ -13,7 +13,7 @@
         {
             <div class="card mb-3">
                 <div class="card-body">
-                    <a asp-controller="Home" asp-action="GoalDetails" asp-route-goalId="@goal.GoalID">
+                    <a asp-controller="Goal" asp-action="GoalDetails" asp-route-goalId="@goal.GoalID">
                         <h5 class="card-title @(goal.IsCompleted ? "text-success" : "")">@goal.Name</h5>
                     </a>
                     <p class="card-text">@goal.Description</p>
@@ -27,4 +27,4 @@
         </div>
         
 }
-<a asp-controller="Home" asp-action="CreateGoal" class="btn btn-primary mt-3">Add New Goal</a>
+<a asp-controller="Goal" asp-action="CreateGoal" class="btn btn-primary mt-3">Add New Goal</a>
