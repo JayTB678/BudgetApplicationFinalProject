@@ -15,6 +15,12 @@ namespace BudgetWepApp.Controllers
         }
         public IActionResult Goals()
         {
+            var theme = Request.Cookies["data-bs-theme"];
+            ViewBag.Theme = theme;
+            CookieOptions cookies = new CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(60)
+            };
             string userID = userManager.GetUserId(User);
             var goals = context.Goals.Where(g => g.userId == userID).ToList() ?? new List<Goal>();
             return View(goals);
@@ -28,6 +34,12 @@ namespace BudgetWepApp.Controllers
         [HttpPost]
         public IActionResult CreateGoal(Goal goal)
         {
+            var theme = Request.Cookies["data-bs-theme"];
+            ViewBag.Theme = theme;
+            CookieOptions cookies = new CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(60)
+            };
             string userID = userManager.GetUserId(User);
 
             goal.User = context.Users.FirstOrDefault(u => u.Id == userID);
@@ -44,6 +56,12 @@ namespace BudgetWepApp.Controllers
         [HttpGet]
         public IActionResult GoalDetails(int goalId)
         {
+            var theme = Request.Cookies["data-bs-theme"];
+            ViewBag.Theme = theme;
+            CookieOptions cookies = new CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(60)
+            };
             var goal = context.Goals.FirstOrDefault(g => g.GoalID == goalId);
             if (goal == null)
             {
@@ -54,6 +72,12 @@ namespace BudgetWepApp.Controllers
         [HttpGet]
         public IActionResult EditGoal(int goalId)
         {
+            var theme = Request.Cookies["data-bs-theme"];
+            ViewBag.Theme = theme;
+            CookieOptions cookies = new CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(60)
+            };
             var goal = context.Goals.FirstOrDefault(g => g.GoalID == goalId);
             if (goal == null)
             {
@@ -66,6 +90,12 @@ namespace BudgetWepApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                var theme = Request.Cookies["data-bs-theme"];
+                ViewBag.Theme = theme;
+                CookieOptions cookies = new CookieOptions
+                {
+                    Expires = DateTime.Now.AddDays(60)
+                };
                 var goalToUpdate = context.Goals.FirstOrDefault(g => g.GoalID == goal.GoalID);
                 if (goalToUpdate != null)
                 {
@@ -85,6 +115,12 @@ namespace BudgetWepApp.Controllers
         [HttpGet]
         public IActionResult DeleteGoal(int goalId)
         {
+            var theme = Request.Cookies["data-bs-theme"];
+            ViewBag.Theme = theme;
+            CookieOptions cookies = new CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(60)
+            };
             var goal = context.Goals.FirstOrDefault(g => g.GoalID == goalId);
             if (goal == null)
             {
@@ -95,6 +131,12 @@ namespace BudgetWepApp.Controllers
         [HttpPost]
         public IActionResult ConfirmDelete(int goalId)
         {
+            var theme = Request.Cookies["data-bs-theme"];
+            ViewBag.Theme = theme;
+            CookieOptions cookies = new CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(60)
+            };
             var goal = context.Goals.FirstOrDefault(g => g.GoalID == goalId);
 
             if (goal != null)
@@ -108,6 +150,12 @@ namespace BudgetWepApp.Controllers
         [HttpPost]
         public IActionResult UpdateCompletedGoal(int GoalID, bool Completed)
         {
+            var theme = Request.Cookies["data-bs-theme"];
+            ViewBag.Theme = theme;
+            CookieOptions cookies = new CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(60)
+            };
             var goal = context.Goals.FirstOrDefault(g => g.GoalID == GoalID);
             if (goal != null)
             {

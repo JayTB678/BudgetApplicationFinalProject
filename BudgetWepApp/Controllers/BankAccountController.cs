@@ -16,6 +16,12 @@ namespace BudgetWepApp.Controllers
         [HttpGet]
         public IActionResult BankAccountInfo(UserViewModel model)
         {
+            var theme = Request.Cookies["data-bs-theme"];
+            ViewBag.Theme = theme;
+            CookieOptions cookies = new CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(60)
+            };
             //this will be got from session later
 
             string userID = userManager.GetUserId(User);
@@ -40,6 +46,12 @@ namespace BudgetWepApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                var theme = Request.Cookies["data-bs-theme"];
+                ViewBag.Theme = theme;
+                CookieOptions cookies = new CookieOptions
+                {
+                    Expires = DateTime.Now.AddDays(60)
+                };
 
                 string userID = userManager.GetUserId(User);
                 User user = context.Users.FirstOrDefault(u => u.Id == userID);
@@ -93,6 +105,12 @@ namespace BudgetWepApp.Controllers
         [HttpPost]
         public IActionResult RemoveIncome(int incomeId)
         {
+            var theme = Request.Cookies["data-bs-theme"];
+            ViewBag.Theme = theme;
+            CookieOptions cookies = new CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(60)
+            };
             var income = context.Incomes.FirstOrDefault(i => i.IncomeID == incomeId);
 
             if (income != null)
