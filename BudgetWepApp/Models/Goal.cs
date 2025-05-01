@@ -4,8 +4,8 @@ namespace BudgetWepApp.Models
 {
     public class Goal
     {
-        public int GoalID { get; set; }
-        public string userId { get; set; }
+        public int? GoalID { get; set; }
+        public string? userId { get; set; }
         public User? User { get; set; }
         [Required(ErrorMessage = "A name for your goal is required.")]
         public string Name { get; set; }

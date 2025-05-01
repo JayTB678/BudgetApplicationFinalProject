@@ -57,11 +57,17 @@ namespace BudgetWepApp.Controllers
             {
                 ModelState.AddModelError("", "User not found.");
             }
-            goal.DateAddded = DateTime.Now;
-            context.Goals.Add(goal);
-            context.SaveChanges();
-            return RedirectToAction("Goals", new { userId = goal.userId });
-        }
+            if (ModelState.IsValid) 
+            { 
+                goal.DateAddded = DateTime.Now;
+                context.Goals.Add(goal);
+                context.SaveChanges();
+                return RedirectToAction("Goals", new { userId = goal.userId });
+            } else
+            {
+                return View(goal);
+            }
+           }
         [Authorize]
         [HttpGet]
         public IActionResult GoalDetails(int goalId)
@@ -99,14 +105,14 @@ namespace BudgetWepApp.Controllers
         [HttpPost]
         public IActionResult EditGoal(Goal goal)
         {
+            var theme = Request.Cookies["data-bs-theme"];
+            ViewBag.Theme = theme;
+            CookieOptions cookies = new CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(60)
+            };
             if (ModelState.IsValid)
             {
-                var theme = Request.Cookies["data-bs-theme"];
-                ViewBag.Theme = theme;
-                CookieOptions cookies = new CookieOptions
-                {
-                    Expires = DateTime.Now.AddDays(60)
-                };
                 var goalToUpdate = context.Goals.FirstOrDefault(g => g.GoalID == goal.GoalID);
                 if (goalToUpdate != null)
                 {
