@@ -24,6 +24,22 @@
             transition: all 0.3s ease-in-out;
         }
 
+        [data-bs-theme="dark"] .section {
+            background-color: #1e1e1e;
+            color: white;
+        }
+
+        [data-bs-theme="dark"] .card,
+        [data-bs-theme="dark"] .p-3,
+        [data-bs-theme="dark"] .border {
+            background-color: #2a2a2a !important;
+            color: white !important;
+            border-color: #555 !important;
+        }
+
+        [data-bs-theme="dark"] nav.navbar {
+            background-color: #333 !important;
+        }
     </style>
 </head>
 <body>
@@ -88,14 +104,21 @@
         </div>
     </footer>
     <script type="text/javascript">
-        document.getElementById('btnSwitch').addEventListener('click', () =>{
-    if (document.documentElement.getAttribute('data-bs-theme') == 'dark') {
-        document.documentElement.setAttribute('data-bs-theme', 'light')
-    } else {
-                document.documentElement.setAttribute('data-bs-theme', 'dark')
-    }
-        })
-        </script>
+        document.getElementById('btnSwitch').addEventListener('click', () => {
+            const body = document.body;
+            const html = document.documentElement;
+
+            if (body.classList.contains('dark')) {
+                body.classList.remove('dark');
+                body.classList.add('light');
+                html.setAttribute('data-bs-theme', 'light');
+            } else {
+                body.classList.remove('light');
+                body.classList.add('dark');
+                html.setAttribute('data-bs-theme', 'dark');
+            }
+        });
+    </script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
