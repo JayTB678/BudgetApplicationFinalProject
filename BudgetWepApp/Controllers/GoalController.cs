@@ -31,6 +31,12 @@ namespace BudgetWepApp.Controllers
         [Authorize]
         public IActionResult CreateGoal()
         {
+            var theme = Request.Cookies["data-bs-theme"];
+            ViewBag.Theme = theme;
+            CookieOptions cookies = new CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(60)
+            };
             return View();
         }
 
@@ -163,12 +169,13 @@ namespace BudgetWepApp.Controllers
                 Expires = DateTime.Now.AddDays(60)
             };
             var goal = context.Goals.FirstOrDefault(g => g.GoalID == GoalID);
-            if (goal != null)
+            if (goal == null)
             {
-                goal.IsCompleted = Completed;
-                context.SaveChanges();
+                return NotFound();
             }
-            return RedirectToAction("GoalDetails", new { goalId = GoalID });
+            goal.IsCompleted = Completed;
+            context.SaveChanges();
+            return RedirectToAction("Goals", new { goalId = GoalID });
         }
     }
 }

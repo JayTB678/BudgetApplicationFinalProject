@@ -15,15 +15,27 @@
         </p>
         <strong>Date Added: </strong> @Model.DateAddded
     </div>
-    <form asp-action="UpdateCompletedGoal" method="post">
-        <input type="hidden" name="GoalID" value="@Model.GoalID" />
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="Completed" value="true" @(Model.IsCompleted ? "checked" : "") />
-            <label class="form-check-label">Is this goal completed?</label>
-        </div>
-        <button type="submit" class="btn btn-success mt-2">Complete Goal</button>
-    </form>
 </div>
 <a asp-action="EditGoal" asp-route-goalId="@Model.GoalID" class="btn btn-primary mt-2">Edit @Model.Name</a>
 <a asp-action="DeleteGoal" asp-route-goalId="@Model.GoalID" class="btn btn-danger mt-2">Delete @Model.Name</a>
 <a asp-action="Goals" class="btn btn-secondary mt-2">Go back to Goals</a>
+<br />
+<form asp-action="UpdateCompletedGoal" method="post">
+    <input type="hidden" name="GoalID" value="@Model.GoalID" />
+    <div class="form-check">
+        <br />
+        <input class="form-check-input" type="checkbox" name="Completed" value="true" id="completedCheckbox" @(Model.IsCompleted ? "checked" : "") onchange="toggleSubmitButton()"/>
+        <label class="form-check-label" for="completedCheckbox">Is this goal completed?</label>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-success mt-2" id="completeGoalBtn" disabled>Complete Goal</button>
+</form>
+<script>
+    function toggleSubmitButton() {
+        document.getElementById("completeGoalBtn").disabled = false;
+    }
+
+    window.onload = function () {
+        toggleSubmitButton();
+    };
+</script>

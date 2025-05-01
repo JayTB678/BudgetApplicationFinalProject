@@ -78,12 +78,12 @@
                     </ul>
                     @if (signInManager.IsSignedIn(User))
                     {
-                        <li class="nav-item">
-                            <form method="post" asp-action="LogOut" asp-controller="Account" asp-area="">
-                                <input type="submit" value="Log Out" />
-                                <span class="text-light">@User.Identity.Name</span>
-                            </form>
-                        </li>
+                            <div class="nav-item" style="margin-right: 30px;">
+                                <form method="post" asp-action="LogOut" asp-controller="Account" asp-area="">
+                                    <input type="submit" value="Log Out" />
+                                    <span>@User.Identity.Name</span>
+                                </form>
+                            </div>
                     }
                     else
                     {
@@ -91,7 +91,7 @@
                         <a class="btn btn-primary" asp-controller="User" asp-area="Admin" asp-action="Index">Admin</a>
                     }
                     <form asp-action="SetTheme" method="post">
-                    <button class="btn btn-danger" type="submit" >Theme</button>
+                    <button class="btn btn-danger" type="submit" style="margin: 0 auto;">Theme</button>
                     </form>
                 </div>
             </div>
