@@ -46,12 +46,28 @@ namespace BudgetWepApp.Controllers
                 return View(model);
             }
         }
-
+        
         public IActionResult Contact()
         {
+            var theme = Request.Cookies["data-bs-theme"];
+            ViewBag.Theme = theme;
+            CookieOptions cookies = new CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(60)
+            };
             return View();
         }
-
+        
+        public IActionResult Thanks()
+        {
+            var theme = Request.Cookies["data-bs-theme"];
+            ViewBag.Theme = theme;
+            CookieOptions cookies = new CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(60)
+            };
+            return View("ThankYou");
+        }
 
         [HttpPost]
         public IActionResult SetTheme()

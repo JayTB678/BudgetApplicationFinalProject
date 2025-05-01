@@ -20,31 +20,23 @@ else{
     <div class="row gx-5">
                 <div class="col">
                     <div class="p-3 border bg-light text-center">Current Balance</div>
-                <div class="p-3 border bg-light">@Model.User.CurrentBalance</div>
-            </div>
-            <div class="col">
-                <div class="p-3 border bg-light text-center">Transactions</div>
-                <div class="p-3 border bg-light">No Transactions</div>
+                <div class="p-3 border bg-light">@Model.User.CurrentBalance.ToString("C2")</div>
             </div>
             @foreach (Transaction transaction in Model.Transactions)
             {
                 if(transaction == Model.Transactions.Last()){
                 <div class="col">
                     <div class="p-3 border bg-light text-center">Transactions</div>
-                <div class="p-3 border bg-light">Last Transaction @transaction.Ammount</div>
+                <div class="p-3 border bg-light">Last Transaction @transaction.Ammount.ToString("C2")</div>
                 <div class="p-3 border bg-light">
                     <a class="btn btn-primary" asp-controller="Withdrawals"
-                       asp-action="WithdrawalsPage">
+                       asp-action="WithdrawalsPage" style="display: flex; justify-content: center;">
                         Transactions
                     </a>
                 </div>
             </div>
                 }
             }
-            <div class="col">
-                <div class="p-3 border bg-light text-center">My Goals</div>
-                <div class="p-3 border bg-light">No Goals</div>
-            </div>
             @foreach (Goal gol in Model.Goals)
             {
                  golTot = golTot + 1;
@@ -63,7 +55,7 @@ else{
                         }
                     </div>
                     <!--<a class="btn btn-primary" asp-controller="Home"></a>-->
-                   Total Goals: @golTot <a class="btn btn-primary" asp-controller="Goal" asp-action="Goals"> Add Goals</a>
+                   Total Goals: @golTot <a class="btn btn-primary" asp-controller="Goal" asp-action="Goals" style="display: flex; justify-content: center;"> Add Goals</a>
                 </div>
             </div>
     </div>
@@ -71,7 +63,7 @@ else{
                 <div class="container overflow-hidden" style="margin-top: 50px;">
                     <div class="row gx-5">
                 <div class="col">
-                    <div class="p-3 border bg-light text-center">Future bar graph</div>
+                    <div class="p-3 border bg-light text-center">Income/Expenses Bar Graph</div>
                     <div>
                         <canvas id="myChart"></canvas>
                     </div>
@@ -82,7 +74,7 @@ else{
                         {
                             <div class="col">
                                 <div class="p-3 border bg-light text-center">Current Goal</div>
-                                <div class="p-3 border bg-light">Goal PlaceHolder</div>
+                                <div class="p-3 border bg-light">@goal.Name</div>
                             </div>
                         }
                     }
@@ -103,18 +95,15 @@ else{
 
 
                         <div class="p-3 border bg-light">Current Recurring Payments</div>
-                        <div class="p-3 border bg-light">Amount: @recur.PaymentAmount</div>
-                        <div class="p-3 bg-light">Frequency: @recur.PaymenFrequencyDays | Till next Payment @timeUntilNextPayment.Days</div>
+                        <div class="p-3 border bg-light">Amount: @recur.PaymentAmount.ToString("C2")</div>
+                        <div class="p-3 border bg-light">Frequency: @recur.PaymenFrequencyDays | Till next Payment @timeUntilNextPayment.Days</div>
                 }
                 }
-            </div>
-            <div class="col">
-                <div class="p-3 border bg-light">Custom</div>
             </div>
             <div class="col">
                 <div class="p-3 border bg-light text-center">Contact Us for Finacial Advice</div>
                 <div class="p-3 border bg-light">
-                    <a class="btn btn-primary" asp-controller="Home"
+                    <a class="btn btn-primary" style="display: flex; justify-content: center;" asp-controller="Home"
                          asp-action="Contact">
                         Contact
                     </a>

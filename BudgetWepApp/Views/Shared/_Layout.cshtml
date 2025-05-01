@@ -39,6 +39,12 @@
 
         [data-bs-theme="dark"] nav.navbar {
             background-color: #333 !important;
+            color: white;
+        }
+
+        [data-bs-theme="light"] .section {
+            background-color: white;
+            color: black;
         }
     </style>
 </head>
@@ -54,7 +60,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         
                         <!-- This is a drop down nav bar -->
