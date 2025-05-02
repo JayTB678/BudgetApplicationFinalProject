@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Razor.TagHelpers;
 
-namespace BudgetWebApp.TagHelpers
+namespace BudgetWepApp.TagHelpers
 {
     public class SubmitButtonTagHelper : TagHelper
     {
