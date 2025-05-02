@@ -52,7 +52,7 @@ else{
                         {
                             <div class="card mb-3">
                                 <div class="card-body">
-                                        <h5 class="card-title @(goal.IsCompleted ? "text-success" : "")"><vc:GoalList name="@goal.Name"></vc:GoalList></h5>
+                                        <h5 class="card-title @(goal.IsCompleted ? "text-success" : "")"><vc:goal-link name="@goal.Name">@goal.Name</vc:goal-link></h5>
                                 </div>
                             </div>
                         }
@@ -77,7 +77,7 @@ else{
                         {
                             <div class="col">
                                 <div class="p-3 border bg-light text-center">Current Goal</div>
-                            <div class="p-3 border bg-light"><vc:goal-link name="@goal.Goal.name"></vc:goal-link></div>
+                            <div class="p-3 border bg-light"><vc:goal-link name="@goal.Name">@goal.Name</vc:goal-link></div>
                             </div>
                         }
                     }

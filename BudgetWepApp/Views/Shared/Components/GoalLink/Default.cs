@@ -8,7 +8,7 @@ namespace BudgetWepApp.Views.Shared.Components.GoalLink
         {
             Goal goal = new Goal
             {
-               Name = name,
+                Name = name,
             };
             return View(goal);
         }
