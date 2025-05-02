@@ -50,27 +50,7 @@
             <!-- Right section -->
             <div class="col-3 border py-4 m-2">
 
-                <div class="p-1 col-6 border bg-light mb-2">Current Balance</div>
-                <div class="p-3 border bg-light mb-6 text-center">@Model.User.CurrentBalance.ToString("C")</div>
-
-                <div class="p-1 mb-2 mt-4 col-12 border bg-light">Recent Transactions</div>
-
-                <div class="col-12">
-                    <div class="scroll-box" style="height: 620px; overflow-y: scroll;">
-                        @foreach (Transaction transaction in @Model.Transactions)
-                        {
-                            <div class="p-1 col-11 border bg-light mb-2">@transaction.TimeStamp</div>
-                            if (@transaction.Ammount > 0)
-                            {
-                                <div class="p-3 col-11 border mb-4 text-center text-success">+ @transaction.Ammount.ToString("C")</div>
-                            }
-                            else
-                            {
-                                <div class="p-3 col-11 border mb-4 text-center text-danger">- @transaction.Ammount.ToString("C")</div>
-                            }
-                        }
-                    </div>
-                </div>
+                @await Html.PartialAsync("_Transactions", Model)
             </div>
         </div>
     </div>

@@ -16,35 +16,35 @@
     <!-- Makes the nav bar activate on hover-->
     <style>
         .navbar-nav .dropdown:hover .dropdown-menu {
-            display: block;
-            margin: 0;
+        display: block;
+        margin: 0;
         }
 
         .dropdown-menu {
-            transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
         }
 
         [data-bs-theme="dark"] .section {
-            background-color: #1e1e1e;
-            color: white;
+        background-color: #1e1e1e;
+        color: white;
         }
 
         [data-bs-theme="dark"] .card,
         [data-bs-theme="dark"] .p-3,
         [data-bs-theme="dark"] .border {
-            background-color: #2a2a2a !important;
-            color: white !important;
-            border-color: #555 !important;
+        background-color: #2a2a2a !important;
+        color: white !important;
+        border-color: #555 !important;
         }
 
         [data-bs-theme="dark"] nav.navbar {
-            background-color: #333 !important;
-            color: white;
+        background-color: #333 !important;
+        color: white;
         }
 
         [data-bs-theme="light"] .section {
-            background-color: white;
-            color: black;
+        background-color: white;
+        color: black;
         }
     </style>
 </head>
@@ -54,7 +54,7 @@
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BudgetWepApp</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
@@ -62,7 +62,7 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        
+
                         <!-- This is a drop down nav bar -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Services </a>
@@ -78,21 +78,26 @@
                     </ul>
                     @if (signInManager.IsSignedIn(User))
                     {
-                            <div class="nav-item" style="margin-right: 30px;">
-                                <form method="post" asp-action="LogOut" asp-controller="Account" asp-area="">
-                                    <input type="submit" value="Log Out" />
-                                    <span>@User.Identity.Name</span>
-                                </form>
-                            </div>
+                        <div class="nav-item" style="margin-right: 30px;">
+                            <form method="post" asp-action="LogOut" asp-controller="Account" asp-area="">
+                                <input type="submit" value="Log Out" />
+                                <span>@User.Identity.Name</span>
+                            </form>
+                        </div>
                     }
                     else
                     {
                         <a class="btn btn-primary" asp-controller="Account" asp-action="Login">Log In</a>
                         <a class="btn btn-primary" asp-controller="User" asp-area="Admin" asp-action="Index">Admin</a>
                     }
-                    <form asp-action="SetTheme" method="post">
-                    <button class="btn btn-danger" type="submit" style="margin: 0 auto;">Theme</button>
-                    </form>
+                    
+                    @if (ViewContext.RouteData.Values["controller"]?.ToString() == "Home" && ViewContext.RouteData.Values["action"]?.ToString() == "Index")
+                    {
+                        <form asp-action="SetTheme" method="post">
+                        <button class="btn btn-danger" type="submit" style="margin: 0 auto;">Theme</button>
+                        </form>
+                    }
+                        
                 </div>
             </div>
         </nav>

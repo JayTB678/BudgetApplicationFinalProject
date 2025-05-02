@@ -63,4 +63,3 @@ var app = builder.Build();
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
-
