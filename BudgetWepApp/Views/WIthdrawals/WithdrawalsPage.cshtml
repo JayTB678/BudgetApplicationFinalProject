@@ -20,7 +20,7 @@
                     </div>
 
                     <div class="d-flex gap-2">
-                        <button type="submit" class="btn border bg-light mb-2">Add</button>
+                        <submit-button class="mb-2">Add</submit-button>
                         <button type="reset" class="btn border bg-light mb-2">Cancel</button>
                     </div>
                 </form>
@@ -39,7 +39,7 @@
 
                             <form asp-action="RemovePayment" method="post" class="mb-2">
                                 <input type="hidden" name="paymentId" value="@payment.RecurringPaymentId" />
-                                <button type="submit" class="btn btn-primary btn-sm">Remove</button>
+                                <submit-button class="btn-sm">Remove</submit-button>
                             </form>
                         }
                     </div>
