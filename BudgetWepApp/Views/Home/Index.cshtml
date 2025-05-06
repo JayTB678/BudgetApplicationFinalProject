@@ -27,7 +27,7 @@ else{
             </div>
             @foreach (Transaction transaction in Model.Transactions)
             {
-                if(transaction == Model.Transactions.Last()){
+                if(transaction == Model.Transactions.First()){
                 <div class="col">
                     <div class="p-3 border bg-light text-center">Transactions</div>
                 <div class="p-3 border bg-light">Last Transaction @transaction.Ammount.ToString("C2")</div>
